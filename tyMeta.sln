@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "src\Web\Web.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{479CCE25-689B-431C-802C-A8C74F522EE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCore", "src\ApplicationCore\ApplicationCore.csproj", "{5821E229-C2BF-44BC-AF07-C557A363B55B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{479CCE25-689B-431C-802C-A8C74F522EE2}.Release|x64.Build.0 = Release|Any CPU
 		{479CCE25-689B-431C-802C-A8C74F522EE2}.Release|x86.ActiveCfg = Release|Any CPU
 		{479CCE25-689B-431C-802C-A8C74F522EE2}.Release|x86.Build.0 = Release|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Debug|x64.Build.0 = Debug|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Debug|x86.Build.0 = Debug|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Release|x64.ActiveCfg = Release|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Release|x64.Build.0 = Release|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Release|x86.ActiveCfg = Release|Any CPU
+		{5821E229-C2BF-44BC-AF07-C557A363B55B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E0EA6673-182C-4083-BD9B-6B96CCB99AC7} = {5408B4D0-666A-4500-8987-5C828F2DE81F}
 		{479CCE25-689B-431C-802C-A8C74F522EE2} = {5408B4D0-666A-4500-8987-5C828F2DE81F}
+		{5821E229-C2BF-44BC-AF07-C557A363B55B} = {5408B4D0-666A-4500-8987-5C828F2DE81F}
 	EndGlobalSection
 EndGlobal
