@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.Models
+namespace ApplicationCore.Entites
 {
     public class TvProgram : BaseEntity
     {

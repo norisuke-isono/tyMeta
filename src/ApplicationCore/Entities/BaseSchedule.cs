@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Infrastructure.Interfaces;
+using ApplicationCore.Interfaces;
 
-namespace Infrastructure.Models
+namespace ApplicationCore.Entites
 {
     public class BaseSchedule : BaseEntity, ISchedule
     {

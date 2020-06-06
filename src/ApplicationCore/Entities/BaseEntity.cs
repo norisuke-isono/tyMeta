@@ -1,6 +1,6 @@
 using System;
 
-namespace Infrastructure.Models
+namespace ApplicationCore.Entites
 {
     public abstract class BaseEntity
     {

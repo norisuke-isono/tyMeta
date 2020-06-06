@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.Models
+namespace ApplicationCore.Entites
 {
     public class Corner : BaseEntity
     {

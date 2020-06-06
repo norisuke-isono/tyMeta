@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Infrastructure.Models;
+using ApplicationCore.Entites;
 
-namespace Infrastructure.Interfaces
+namespace ApplicationCore.Interfaces
 {
     public interface ISchedule
     {
