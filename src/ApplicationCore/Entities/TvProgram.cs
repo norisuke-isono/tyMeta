@@ -10,5 +10,7 @@ namespace ApplicationCore.Entites
         public string Name { get; set; }
 
         public List<Corner> Corners { get; set; }
+
+        public List<Broadcast> Broadcasts { get; set; }
     }
 }

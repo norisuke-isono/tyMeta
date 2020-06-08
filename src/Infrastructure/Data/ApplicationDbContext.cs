@@ -13,6 +13,9 @@ namespace Infrastructure.Data
 
         public DbSet<TvProgram> TvPrograms { get; set; }
         public DbSet<Corner> Corners { get; set; }
+        public DbSet<Broadcast> Broadcasts { get; set; }
         public DbSet<BaseSchedule> BaseSchedules { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Specification> Specifications { get; set; }
     }
 }
