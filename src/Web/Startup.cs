@@ -37,6 +37,7 @@ namespace Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddScoped<ITvProgramService, TvProgramService>();
             services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
 
