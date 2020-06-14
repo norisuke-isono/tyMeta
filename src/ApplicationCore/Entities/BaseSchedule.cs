@@ -10,7 +10,10 @@ namespace ApplicationCore.Entites
         public int Sequence { get; set; }
 
         [Required]
-        public int CornerId { get; set; }
+        public int TvProgramId { get; set; }
+        public TvProgram TvProgram { get; set; }
+
+        public int? CornerId { get; set; }
         public Corner Corner { get; set; }
     }
 }

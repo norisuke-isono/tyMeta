@@ -18,5 +18,13 @@ namespace Infrastructure.Data
         public DbSet<BaseSchedule> BaseSchedules { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Specification> Specifications { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BaseSchedule>()
+            .HasIndex(x => new { x.TvProgramId, x.Sequence }).IsUnique();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
