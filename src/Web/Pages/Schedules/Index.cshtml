@@ -62,8 +62,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @* TODO: *@
-                <a>明細</a> 
+                <a asp-page="/Specification/Edit" asp-route-id="@item.SpecificationId">明細</a>
             </td>
         </tr>
 }
