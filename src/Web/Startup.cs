@@ -38,6 +38,7 @@ namespace Web
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddScoped<ITvProgramService, TvProgramService>();
+            services.AddScoped<IBroadcastService, BroadcastService>();
             services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
 

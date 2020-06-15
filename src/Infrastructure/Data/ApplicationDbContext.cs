@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using ApplicationCore.Entites;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -25,6 +27,11 @@ namespace Infrastructure.Data
             .HasIndex(x => new { x.TvProgramId, x.Sequence }).IsUnique();
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }
