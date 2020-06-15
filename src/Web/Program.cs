@@ -18,6 +18,10 @@ namespace Web
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+               .ConfigureLogging(logBuilder =>
+                {
+                    logBuilder.AddAzureWebAppDiagnostics();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
