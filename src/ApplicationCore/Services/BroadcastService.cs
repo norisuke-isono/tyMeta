@@ -42,7 +42,19 @@ namespace ApplicationCore.Services
                     }).ToList(),
             };
 
-            await _context.Broadcasts.AddAsync(broadcast);
+            _context.Broadcasts.Add(broadcast);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteBroadcast(int tvProgramId, DateTime airDate)
+        {
+            var broadcast = await _context.Broadcasts
+                .SingleOrDefaultAsync(x => x.TvProgramId == tvProgramId && x.AirDate == airDate);
+
+            if (broadcast == null)
+                return;
+
+            _context.Broadcasts.Remove(broadcast);
             await _context.SaveChangesAsync();
         }
     }
