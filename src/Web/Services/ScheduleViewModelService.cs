@@ -26,9 +26,9 @@ namespace Web.Services
                 {
                     Sequence = schedule.Sequence,
                     CornerName = schedule.Corner.Name,
+                    CornerType = schedule.Corner.Type,
                     AirDate = schedule.Broadcast.AirDate,
                     Title = schedule.Specification.Title,
-                    Text = schedule.Specification.Text,
                     ScheduleId = schedule.Id,
                     BroadcastId = schedule.BroadcastId,
                     CornerId = schedule.Corner.Id,

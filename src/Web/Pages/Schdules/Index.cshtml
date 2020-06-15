@@ -2,69 +2,68 @@
 @model Web.Pages_Schdules.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "番組構成";
 }
 
-<h1>Index</h1>
+<h1>番組構成</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto mr-auto">
+        <form method="post" asp-page-handler="search">
+            <p>
+                放送日: <input type="date" asp-for="AirDate" />
+                番組: <select asp-for="TvProgramId" asp-items="Model.TvPrograms" ></select>
+                <input type="submit" value="検索" />
+            </p>
+        </form>
+    </div>
+    <div class="col-auto">
+        <form method="post" asp-page-handler="delete">
+            <input type="hidden" asp-for="AirDate" />
+            <input type="hidden" asp-for="TvProgramId" />
+            <input type="submit" value="削除" class="btn btn-danger" />
+        </form>
+    </div>
+  </div>
+</div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].Sequence)
+                @Html.DisplayNameFor(model => model.Schedules[0].Sequence)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].Corner)
+                @Html.DisplayNameFor(model => model.Schedules[0].CornerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].Broadcast)
+                @Html.DisplayNameFor(model => model.Schedules[0].CornerType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].CreateUserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].UpdateUserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedule[0].UpdatedAt)
+                @Html.DisplayNameFor(model => model.Schedules[0].Title)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Schedule) {
+@foreach (var item in Model.Schedules) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Sequence)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Corner.Name)
+                @Html.DisplayFor(modelItem => item.CornerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Broadcast.Id)
+                @Html.DisplayFor(modelItem => item.CornerType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateUserId)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdateUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @* TODO: *@
+                <a>明細</a> 
             </td>
         </tr>
 }
