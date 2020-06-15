@@ -7,6 +7,6 @@ namespace ApplicationCore.Interfaces
 {
     public interface IScheduleService
     {
-        Task<List<Schedule>> GetSchedulesAsync(int tvProgramId, DateTime AirDate);
+        Task<List<Schedule>> GetSchedulesAsync(int tvProgramId, DateTime airDate);
     }
 }
