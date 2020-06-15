@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Web.Interfaces;
 using Web.ViewModels;
 
-namespace Web.Pages_Schdules
+namespace Web.Pages_Schedules
 {
     public class IndexModel : PageModel
     {
