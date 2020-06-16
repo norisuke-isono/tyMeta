@@ -1,0 +1,49 @@
+@page
+@model Web.Pages_ArticleSources.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ArticleSource</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArticleSource.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArticleSource.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArticleSource.CreateUserId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArticleSource.CreateUserId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArticleSource.UpdateUserId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArticleSource.UpdateUserId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArticleSource.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArticleSource.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArticleSource.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArticleSource.UpdatedAt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ArticleSource.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
