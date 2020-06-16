@@ -23,6 +23,7 @@ namespace ApplicationCore.Services
                 .Include(x => x.Broadcast)
                 .Include(x => x.Specification)
                 .Where(x => x.Corner.TvProgramId == tvProgramId && x.Broadcast.AirDate == airDate)
+                .OrderBy(x => x.Sequence)
                 .ToListAsync();
 
             return schedules;
