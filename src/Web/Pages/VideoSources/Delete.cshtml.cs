@@ -29,7 +29,7 @@ namespace Web.Pages_VideoSources
                 return NotFound();
             }
 
-            VideoSource = await _context.videoSources.FirstOrDefaultAsync(m => m.Id == id);
+            VideoSource = await _context.VideoSources.FirstOrDefaultAsync(m => m.Id == id);
 
             if (VideoSource == null)
             {
@@ -45,11 +45,11 @@ namespace Web.Pages_VideoSources
                 return NotFound();
             }
 
-            VideoSource = await _context.videoSources.FindAsync(id);
+            VideoSource = await _context.VideoSources.FindAsync(id);
 
             if (VideoSource != null)
             {
-                _context.videoSources.Remove(VideoSource);
+                _context.VideoSources.Remove(VideoSource);
                 await _context.SaveChangesAsync();
             }
 

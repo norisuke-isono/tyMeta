@@ -29,7 +29,7 @@ namespace Web.Pages_ArticleSources
                 return NotFound();
             }
 
-            ArticleSource = await _context.articleSources.FirstOrDefaultAsync(m => m.Id == id);
+            ArticleSource = await _context.ArticleSources.FirstOrDefaultAsync(m => m.Id == id);
 
             if (ArticleSource == null)
             {
@@ -45,11 +45,11 @@ namespace Web.Pages_ArticleSources
                 return NotFound();
             }
 
-            ArticleSource = await _context.articleSources.FindAsync(id);
+            ArticleSource = await _context.ArticleSources.FindAsync(id);
 
             if (ArticleSource != null)
             {
-                _context.articleSources.Remove(ArticleSource);
+                _context.ArticleSources.Remove(ArticleSource);
                 await _context.SaveChangesAsync();
             }
 

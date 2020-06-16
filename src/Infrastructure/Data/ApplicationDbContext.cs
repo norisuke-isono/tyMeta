@@ -20,8 +20,8 @@ namespace Infrastructure.Data
         public DbSet<BaseSchedule> BaseSchedules { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Specification> Specifications { get; set; }
-        public DbSet<VideoSource> videoSources { get; set; }
-        public DbSet<ArticleSource> articleSources { get; set; }
+        public DbSet<VideoSource> VideoSources { get; set; }
+        public DbSet<ArticleSource> ArticleSources { get; set; }
         public DbSet<SpecificationVideoSource> SpecificationVideoSources { get; set; }
         public DbSet<SpecificationArticleSource> SpecificationArticleSources { get; set; }
 

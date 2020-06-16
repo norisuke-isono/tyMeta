@@ -19,11 +19,11 @@ namespace Web.Pages_VideoSources
             _context = context;
         }
 
-        public IList<VideoSource> VideoSource { get;set; }
+        public IList<VideoSource> VideoSource { get; set; }
 
         public async Task OnGetAsync()
         {
-            VideoSource = await _context.videoSources.ToListAsync();
+            VideoSource = await _context.VideoSources.ToListAsync();
         }
     }
 }

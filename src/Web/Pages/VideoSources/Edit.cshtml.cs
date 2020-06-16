@@ -30,7 +30,7 @@ namespace Web.Pages_VideoSources
                 return NotFound();
             }
 
-            VideoSource = await _context.videoSources.FirstOrDefaultAsync(m => m.Id == id);
+            VideoSource = await _context.VideoSources.FirstOrDefaultAsync(m => m.Id == id);
 
             if (VideoSource == null)
             {
@@ -71,7 +71,7 @@ namespace Web.Pages_VideoSources
 
         private bool VideoSourceExists(int id)
         {
-            return _context.videoSources.Any(e => e.Id == id);
+            return _context.VideoSources.Any(e => e.Id == id);
         }
     }
 }

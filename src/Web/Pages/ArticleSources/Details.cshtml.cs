@@ -28,7 +28,7 @@ namespace Web.Pages_ArticleSources
                 return NotFound();
             }
 
-            ArticleSource = await _context.articleSources.FirstOrDefaultAsync(m => m.Id == id);
+            ArticleSource = await _context.ArticleSources.FirstOrDefaultAsync(m => m.Id == id);
 
             if (ArticleSource == null)
             {

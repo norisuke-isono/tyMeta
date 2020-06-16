@@ -19,11 +19,11 @@ namespace Web.Pages_ArticleSources
             _context = context;
         }
 
-        public IList<ArticleSource> ArticleSource { get;set; }
+        public IList<ArticleSource> ArticleSource { get; set; }
 
         public async Task OnGetAsync()
         {
-            ArticleSource = await _context.articleSources.ToListAsync();
+            ArticleSource = await _context.ArticleSources.ToListAsync();
         }
     }
 }

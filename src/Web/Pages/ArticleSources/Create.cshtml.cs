@@ -36,7 +36,7 @@ namespace Web.Pages_ArticleSources
                 return Page();
             }
 
-            _context.articleSources.Add(ArticleSource);
+            _context.ArticleSources.Add(ArticleSource);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

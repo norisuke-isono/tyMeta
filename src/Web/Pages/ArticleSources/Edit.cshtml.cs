@@ -30,7 +30,7 @@ namespace Web.Pages_ArticleSources
                 return NotFound();
             }
 
-            ArticleSource = await _context.articleSources.FirstOrDefaultAsync(m => m.Id == id);
+            ArticleSource = await _context.ArticleSources.FirstOrDefaultAsync(m => m.Id == id);
 
             if (ArticleSource == null)
             {
@@ -71,7 +71,7 @@ namespace Web.Pages_ArticleSources
 
         private bool ArticleSourceExists(int id)
         {
-            return _context.articleSources.Any(e => e.Id == id);
+            return _context.ArticleSources.Any(e => e.Id == id);
         }
     }
 }

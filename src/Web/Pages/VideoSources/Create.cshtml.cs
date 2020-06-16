@@ -36,7 +36,7 @@ namespace Web.Pages_VideoSources
                 return Page();
             }
 
-            _context.videoSources.Add(VideoSource);
+            _context.VideoSources.Add(VideoSource);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
