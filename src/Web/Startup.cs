@@ -40,6 +40,7 @@ namespace Web
             services.AddScoped<ITvProgramService, TvProgramService>();
             services.AddScoped<IBroadcastService, BroadcastService>();
             services.AddScoped<IScheduleService, ScheduleService>();
+            services.AddScoped<ISpecificationService, SpecificationService>();
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
 
             services.AddControllersWithViews();
