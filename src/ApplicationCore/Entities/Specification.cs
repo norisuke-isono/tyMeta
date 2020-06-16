@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ApplicationCore.Interfaces;
 
@@ -14,5 +15,8 @@ namespace ApplicationCore.Entites
         [Required]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
+
+        public List<SpecificationVideoSource> SpecificationVideoSources { get; set; }
+        public List<SpecificationArticleSource> SpecificationArticleSources { get; set; }
     }
 }
