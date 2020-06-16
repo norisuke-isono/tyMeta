@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Common.Exceptions;
 using ApplicationCore.Entites;
 using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -52,7 +53,7 @@ namespace ApplicationCore.Services
                 .SingleOrDefaultAsync(x => x.TvProgramId == tvProgramId && x.AirDate == airDate);
 
             if (broadcast == null)
-                return;
+                throw new NotFoundException(nameof(Broadcast), tvProgramId, airDate);
 
             _context.Broadcasts.Remove(broadcast);
             await _context.SaveChangesAsync();

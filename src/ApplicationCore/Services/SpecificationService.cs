@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Common.Exceptions;
 using ApplicationCore.Entites;
 using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,7 @@ namespace ApplicationCore.Services
                 .SingleOrDefaultAsync(x => x.Id == Specification.Id);
 
             if (entity == null)
-                return;
+                throw new NotFoundException(nameof(Specification), Specification.Id);
 
             entity.Title = Specification.Title;
             entity.Text = Specification.Text;
