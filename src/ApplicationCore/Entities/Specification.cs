@@ -12,6 +12,12 @@ namespace ApplicationCore.Entites
         [MaxLength(1000)]
         public string Text { get; set; }
 
+        [MaxLength(255)]
+        public string Director { get; set; }
+
+        [MaxLength(255)]
+        public string Desk { get; set; }
+
         [Required]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
