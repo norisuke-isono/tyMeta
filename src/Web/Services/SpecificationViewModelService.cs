@@ -40,6 +40,8 @@ namespace Web.Services
                 SpecificationId = specification.Id,
                 Title = specification.Title,
                 Text = specification.Text,
+                Director = specification.Director,
+                Desk = specification.Desk,
                 VideoSourceSelectItems = videoSources.Select(x =>
                     new SelectListItem
                     {
@@ -68,6 +70,8 @@ namespace Web.Services
                 Id = viewModel.SpecificationId,
                 Title = viewModel.Title,
                 Text = viewModel.Text,
+                Director = viewModel.Director,
+                Desk = viewModel.Desk,
                 SpecificationVideoSources = viewModel.VideoSourceSelectItems
                     .Where(x => x.Selected)
                     .Select(x => new SpecificationVideoSource

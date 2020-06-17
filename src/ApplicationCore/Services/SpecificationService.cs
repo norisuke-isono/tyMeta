@@ -36,8 +36,11 @@ namespace ApplicationCore.Services
             if (entity == null)
                 throw new NotFoundException(nameof(Specification), Specification.Id);
 
+            // TODO: _context.Entry(entity).State = EntityState.Modified;
             entity.Title = Specification.Title;
             entity.Text = Specification.Text;
+            entity.Director = Specification.Director;
+            entity.Desk = Specification.Desk;
             entity.SpecificationVideoSources = Specification.SpecificationVideoSources;
             entity.SpecificationArticleSources = Specification.SpecificationArticleSources;
 
