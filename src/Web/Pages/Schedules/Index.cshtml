@@ -43,6 +43,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Schedules[0].Title)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedules[0].Director)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedules[0].Desk)
+            </th>            
             <th></th>
         </tr>
     </thead>
@@ -61,6 +67,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desk)
+            </td>            
             <td>
                 <a asp-page="/Specification/Edit" asp-route-id="@item.SpecificationId">明細</a>
             </td>

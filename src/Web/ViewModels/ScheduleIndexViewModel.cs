@@ -15,6 +15,10 @@ namespace Web.ViewModels
         public DateTime AirDate { get; set; }
         [Display(Name = "見出し")]
         public string Title { get; set; }
+        [Display(Name = "担当ディレクター")]
+        public string Director { get; set; }
+        [Display(Name = "担当デスク")]
+        public string Desk { get; set; }
         public int ScheduleId { get; set; }
         public int BroadcastId { get; set; }
         public int CornerId { get; set; }

@@ -29,6 +29,8 @@ namespace Web.Services
                     CornerType = schedule.Corner.Type,
                     AirDate = schedule.Broadcast.AirDate,
                     Title = schedule.Specification.Title,
+                    Director = schedule.Specification.Director,
+                    Desk = schedule.Specification.Desk,
                     ScheduleId = schedule.Id,
                     BroadcastId = schedule.BroadcastId,
                     CornerId = schedule.Corner.Id,
