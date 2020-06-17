@@ -19,6 +19,8 @@ namespace ApplicationCore.Services
         public async Task<Specification> FindSpecificationAsync(int specificationId)
         {
             var specification = await _context.Specifications
+                .Include(x => x.SpecificationVideoSources)
+                .Include(x => x.SpecificationArticleSources)
                 .SingleOrDefaultAsync(x => x.Id == specificationId);
 
             return specification;
@@ -27,6 +29,8 @@ namespace ApplicationCore.Services
         public async Task UpdateSpecificationAsync(Specification Specification)
         {
             var entity = await _context.Specifications
+                .Include(x => x.SpecificationVideoSources)
+                .Include(x => x.SpecificationArticleSources)
                 .SingleOrDefaultAsync(x => x.Id == Specification.Id);
 
             if (entity == null)
@@ -34,6 +38,8 @@ namespace ApplicationCore.Services
 
             entity.Title = Specification.Title;
             entity.Text = Specification.Text;
+            entity.SpecificationVideoSources = Specification.SpecificationVideoSources;
+            entity.SpecificationArticleSources = Specification.SpecificationArticleSources;
 
             await _context.SaveChangesAsync();
         }

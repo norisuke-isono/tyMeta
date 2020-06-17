@@ -44,6 +44,7 @@ namespace Web
             services.AddScoped<IVideoSourceService, VideoSourceService>();
             services.AddScoped<IArticleSourceService, ArticleSourceService>();
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
+            services.AddScoped<ISpecificationViewModelService, SpecificationViewModelService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
