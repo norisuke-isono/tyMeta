@@ -19,14 +19,17 @@ namespace Web.Pages_Schedules
     {
         private readonly ITvProgramService _tvProgramService;
         private readonly IBroadcastService _broadcastService;
+        private readonly IScheduleService _scheduleService;
         private readonly IScheduleViewModelService _scheduleViewModelService;
 
         public IndexModel(ITvProgramService tvProgramService,
                           IBroadcastService broadcastService,
+                          IScheduleService scheduleService,
                           IScheduleViewModelService scheduleViewModelService)
         {
             _tvProgramService = tvProgramService;
             _broadcastService = broadcastService;
+            _scheduleService = scheduleService;
             _scheduleViewModelService = scheduleViewModelService;
         }
 
@@ -66,6 +69,13 @@ namespace Web.Pages_Schedules
         {
             await _broadcastService
                 .DeleteBroadcast((int)TvProgramId, AirDate);
+
+            return RedirectToPage("./Index");
+        }
+
+        public async Task<IActionResult> OnPostSortAsync(int[] scheduleIds)
+        {
+            await _scheduleService.SortSchedulesAsync(scheduleIds);
 
             return RedirectToPage("./Index");
         }

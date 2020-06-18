@@ -5,7 +5,8 @@
     ViewData["Title"] = "番組構成";
 }
 
-<h1>番組構成</h1>
+<h3>番組構成</h3>
+<hr />
 
 <div class="container-fluid">
   <div class="row">
@@ -28,12 +29,12 @@
   </div>
 </div>
 
-<table class="table">
+<table id="sortable" class="table">
     <thead>
         <tr>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Schedules[0].Sequence)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Schedules[0].CornerName)
             </th>
@@ -50,14 +51,15 @@
                 @Html.DisplayNameFor(model => model.Schedules[0].Desk)
             </th>            
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Schedules) {
-        <tr>
-            <td>
+        <tr data-scheduleId="@item.ScheduleId">
+            @* <td>
                 @Html.DisplayFor(modelItem => item.Sequence)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.CornerName)
             </td>
@@ -76,7 +78,44 @@
             <td>
                 <a asp-page="/Specification/Edit" asp-route-id="@item.SpecificationId">明細</a>
             </td>
+            <td class="sortable-handle">
+                <i class="fas fa-arrows-alt-v"></i>
+            </td> 
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts{
+    <script>
+        $(function(){
+            function fixPlaceHolderWidth(event, ui){
+                // adjust placeholder td width to original td width
+                ui.children().each(function(){
+                    $(this).width($(this).width());
+                });
+                return ui;
+            };
+
+            $('#sortable tbody').sortable({
+                handle: '.sortable-handle',
+                placeholder: 'ui-state-highlight',
+                helper: fixPlaceHolderWidth,
+                start: function(event, ui){
+                    ui.placeholder.height(ui.helper.outerHeight());
+                },
+                update: function (event, ui) {
+                    const items = $(this).sortable("toArray", {attribute: "data-scheduleId"});
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Schedules/Index?handler=sort',
+                        data: { scheduleIds: items },
+                        headers: {
+                            RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

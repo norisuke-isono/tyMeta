@@ -8,5 +8,6 @@ namespace ApplicationCore.Interfaces
     public interface IScheduleService
     {
         Task<List<Schedule>> GetSchedulesAsync(int tvProgramId, DateTime airDate);
+        Task SortSchedulesAsync(int[] scheduleIds);
     }
 }

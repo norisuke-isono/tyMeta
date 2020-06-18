@@ -28,5 +28,18 @@ namespace ApplicationCore.Services
 
             return schedules;
         }
+
+        public async Task SortSchedulesAsync(int[] scheduleIds)
+        {
+            var schedules = await _context.Schedules
+                .Where(x => scheduleIds.Contains(x.Id))
+                .ToListAsync();
+
+            if (scheduleIds.Count() != schedules.Count())
+                throw new ArgumentException();
+
+            schedules.ForEach(x => { x.Sequence = Array.IndexOf(scheduleIds, x.Id) + 1; });
+            await _context.SaveChangesAsync();
+        }
     }
 }
