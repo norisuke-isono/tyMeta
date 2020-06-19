@@ -20,8 +20,7 @@ namespace Web.Services
         public SpecificationViewModelService(
             ISpecificationService specificationService,
             IVideoSourceService videoSourceService,
-            IArticleSourceService articleSourceService
-            )
+            IArticleSourceService articleSourceService)
         {
             _specificationService = specificationService;
             _videoSourceService = videoSourceService;

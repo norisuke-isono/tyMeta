@@ -23,6 +23,7 @@ namespace ApplicationCore.Entites
         public Schedule Schedule { get; set; }
 
         public List<SpecificationVideoSource> SpecificationVideoSources { get; set; }
+
         public List<SpecificationArticleSource> SpecificationArticleSources { get; set; }
     }
 }
