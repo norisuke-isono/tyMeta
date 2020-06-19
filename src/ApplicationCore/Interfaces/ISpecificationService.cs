@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationCore.Entites;
+using ApplicationCore.Models;
 
 namespace ApplicationCore.Interfaces
 {
@@ -10,5 +11,7 @@ namespace ApplicationCore.Interfaces
         Task<Specification> FindSpecificationAsync(int specificationId);
 
         Task UpdateSpecificationAsync(Specification specification);
+
+        Task<List<Specification>> SearchSpecificationsAsync(SpecificationFilter filter);
     }
 }
