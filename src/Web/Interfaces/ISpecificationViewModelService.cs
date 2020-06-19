@@ -9,6 +9,8 @@ namespace Web.Interfaces
     {
         Task<SpecificationViewModel> GetSpecificationViewModel(int specificationId);
 
+        Task<List<SpecificationIndexViewModel>> SearchSpecifications(SpecificationFilterViewModel filterViewModel);
+
         Task UpdateSpecificationFrom(SpecificationViewModel viewModel);
     }
 }

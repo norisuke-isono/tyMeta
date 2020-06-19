@@ -1,0 +1,122 @@
+@page
+@model Web.Pages_Specification.SearchModel
+
+@{
+    ViewData["Title"] = "明細検索";
+}
+
+<h3>明細検索</h3>
+<hr />
+
+<div class="container-fluid">
+
+    <form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <input asp-for="Filter.Keyword" class="form-control" placeholder="キーワードを入力"/>
+            <span asp-validation-for="Filter.Keyword" class="text-danger"></span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.TvProgramId" ></label>
+                <select asp-for="Filter.TvProgramId" class="form-control" asp-items="Model.TvPrograms">
+                    <option value="">すべて</option>
+                </select>
+                <span asp-validation-for="Filter.TvProgramId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.CornerId" ></label>
+                <select asp-for="Filter.CornerId" class="form-control" asp-items="Model.Corners">
+                    <option value="">すべて</option>
+                </select>
+                <span asp-validation-for="Filter.CornerId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.AirDateFrom"></label>
+                <input asp-for="Filter.AirDateFrom" class="form-control" type="date" placeholder="From" />
+                <span asp-validation-for="Filter.AirDateFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.AirDateTo" class="invisible"></label>
+                <input asp-for="Filter.AirDateTo" class="form-control" type="date" placeholder="To" />
+                <span asp-validation-for="Filter.AirDateTo" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.VideoSourceId" ></label>
+                <select asp-for="Filter.VideoSourceId" class="form-control" asp-items="Model.VideoSources">
+                    <option value="">すべて</option>
+                </select>
+                <span asp-validation-for="Filter.VideoSourceId" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.ArticleSourceId" ></label>
+                <select asp-for="Filter.ArticleSourceId" class="form-control" asp-items="Model.ArticleSources">
+                    <option value="">すべて</option>
+                </select>
+                <span asp-validation-for="Filter.ArticleSourceId" class="text-danger"></span>
+            </div>            
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.Director" ></label>
+                <input asp-for="Filter.Director" class="form-control" placeholder="ディレクター名を入力"/>
+                <span asp-validation-for="Filter.Director" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="Filter.Desk" ></label>
+                <input asp-for="Filter.Desk" class="form-control" placeholder="デスク名を入力"/>
+                <span asp-validation-for="Filter.Desk" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search" aria-hidden="true"></i> 検索
+            </button>
+        </div>     
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Specifications[0].AirDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specifications[0].TvProgramName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specifications[0].CornerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specifications[0].Title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Specifications) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AirDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TvProgramName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CornerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>         
+            <td>
+                <a asp-page="/Specification/Edit" asp-route-id="@item.SpecificationId">明細</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

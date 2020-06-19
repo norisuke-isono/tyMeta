@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Entites;
 using ApplicationCore.Interfaces;
+using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Interfaces;
 using Web.ViewModels;
@@ -61,6 +62,36 @@ namespace Web.Services
             };
 
             return viewModel;
+        }
+
+        public async Task<List<SpecificationIndexViewModel>> SearchSpecifications(SpecificationFilterViewModel filterViewModel)
+        {
+            var specifications = await _specificationService
+                .SearchSpecificationsAsync(new SpecificationFilter
+                {
+                    Keyword = filterViewModel.Keyword,
+                    TvProgramId = filterViewModel.TvProgramId,
+                    CornerId = filterViewModel.CornerId,
+                    VideoSourceId = filterViewModel.VideoSourceId,
+                    ArticleSourceId = filterViewModel.ArticleSourceId,
+                    Director = filterViewModel.Director,
+                    Desk = filterViewModel.Desk,
+                    AirDateFrom = filterViewModel.AirDateFrom,
+                    AirDateTo = filterViewModel.AirDateTo,
+                    pageIndex = 1, // TODO:
+                    pageSize = 20, // TODO:
+                });
+
+            var indexViewModels = specifications.Select(x => new SpecificationIndexViewModel
+            {
+                SpecificationId = x.Id,
+                AirDate = x.Schedule.Broadcast.AirDate,
+                TvProgramName = x.Schedule.Broadcast.TvProgram.Name,
+                CornerName = x.Schedule.Corner.Name,
+                Title = x.Title,
+            }).ToList();
+
+            return indexViewModels;
         }
 
         public async Task UpdateSpecificationFrom(SpecificationViewModel viewModel)
