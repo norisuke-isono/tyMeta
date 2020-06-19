@@ -11,6 +11,24 @@
 <form method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group row">
+        <label asp-for="SpecificationViewModel.AirDate" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-4">
+            <input asp-for="SpecificationViewModel.AirDate" class="form-control" readonly />
+        </div>
+    </div>    
+    <div class="form-group row">
+        <label asp-for="SpecificationViewModel.TvProgramName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-4">
+            <input asp-for="SpecificationViewModel.TvProgramName" class="form-control" readonly />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="SpecificationViewModel.CornerName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-4">
+            <input asp-for="SpecificationViewModel.CornerName" class="form-control" readonly />
+        </div>
+    </div>
+    <div class="form-group row">
         <label asp-for="SpecificationViewModel.Director" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-4">
             <input asp-for="SpecificationViewModel.Director" class="form-control" />

@@ -21,9 +21,14 @@ namespace ApplicationCore.Services
         public async Task<Specification> FindSpecificationAsync(int specificationId)
         {
             var specification = await _context.Specifications
-                .Include(x => x.SpecificationVideoSources)
-                .Include(x => x.SpecificationArticleSources)
-                .SingleOrDefaultAsync(x => x.Id == specificationId);
+                .Include(spec => spec.Schedule)
+                    .ThenInclude(schedule => schedule.Broadcast)
+                        .ThenInclude(Broadcast => Broadcast.TvProgram)
+                .Include(spec => spec.Schedule)
+                    .ThenInclude(Schedule => Schedule.Corner)
+                .Include(spec => spec.SpecificationVideoSources)
+                .Include(spec => spec.SpecificationArticleSources)
+                .SingleOrDefaultAsync(spec => spec.Id == specificationId);
 
             return specification;
         }

@@ -38,6 +38,9 @@ namespace Web.Services
             var viewModel = new SpecificationViewModel
             {
                 SpecificationId = specification.Id,
+                TvProgramName = specification.Schedule.Broadcast.TvProgram.Name,
+                CornerName = specification.Schedule.Corner.Name,
+                AirDate = specification.Schedule.Broadcast.AirDate,
                 Title = specification.Title,
                 Text = specification.Text,
                 Director = specification.Director,
