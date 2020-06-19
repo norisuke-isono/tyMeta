@@ -54,21 +54,21 @@ namespace Web.Pages_Schedules
                                         nameof(TvProgram.Id), nameof(TvProgram.Name));
 
             var broadcast = await _broadcastService
-                .FindBroadcastAsync((int)TvProgramId, AirDate);
+                .FindBroadcastAsync(TvProgramId, AirDate);
             if (broadcast == null)
             {
                 await _broadcastService
-                    .CreateBroadcastWithDefaultSchedules((int)TvProgramId, AirDate);
+                    .CreateBroadcastWithDefaultSchedules(TvProgramId, AirDate);
             }
 
             Schedules = await _scheduleViewModelService
-                .GetSchedules((int)TvProgramId, AirDate);
+                .GetSchedules(TvProgramId, AirDate);
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()
         {
             await _broadcastService
-                .DeleteBroadcast((int)TvProgramId, AirDate);
+                .DeleteBroadcast(TvProgramId, AirDate);
 
             return RedirectToPage("./Index");
         }
