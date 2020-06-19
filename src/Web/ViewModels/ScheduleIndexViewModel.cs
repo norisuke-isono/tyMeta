@@ -15,6 +15,7 @@ namespace Web.ViewModels
         public string CornerType { get; set; }
 
         [Display(Name = "放送日")]
+        [DataType(DataType.Date)]
         public DateTime AirDate { get; set; }
 
         [Display(Name = "見出し")]

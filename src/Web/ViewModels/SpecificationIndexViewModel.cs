@@ -10,6 +10,7 @@ namespace Web.ViewModels
         public int SpecificationId { get; set; }
 
         [Display(Name = "放送日")]
+        [DataType(DataType.Date)]
         public DateTime AirDate { get; set; }
 
         [Display(Name = "番組")]
