@@ -6,9 +6,9 @@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Affiliation)
             </th>
-            <th scope="col">
+            @* <th scope="col">
                 @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].UseSearch)
-            </th>
+            </th> *@
             <th scope="col">
                 @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Name)
             </th>
@@ -37,9 +37,9 @@
                 <td>
                     <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Affiliation" />
                 </td>
-                <td>
+                @* <td>
                     <input type="checkbox" class="form-check-input" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].UseSearch">
-                </td>
+                </td> *@
                 <td>
                     <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Name" />
                 </td>
