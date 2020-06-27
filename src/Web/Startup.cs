@@ -42,6 +42,7 @@ namespace Web
             services.AddScoped<IBroadcastService, BroadcastService>();
             services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<ISpecificationService, SpecificationService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IVideoSourceService, VideoSourceService>();
             services.AddScoped<IArticleSourceService, ArticleSourceService>();
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
