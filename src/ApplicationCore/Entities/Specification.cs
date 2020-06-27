@@ -18,6 +18,18 @@ namespace ApplicationCore.Entites
         [MaxLength(255)]
         public string Desk { get; set; }
 
+        [MaxLength(1000)]
+        public string Tag { get; set; }
+
+        [MaxLength(1000)]
+        public string Keyword { get; set; }
+
+        [MaxLength(1000)]
+        public string VideoSourceNote { get; set; }
+
+        [MaxLength(1000)]
+        public string ArticleSourceNote { get; set; }
+
         [Required]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
