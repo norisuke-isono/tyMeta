@@ -196,7 +196,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/Specification/Edit/AddMaterial',
-                data: $('form').serialize(),
+                data: $('#materials :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
@@ -211,7 +211,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/Specification/Edit/DeleteMaterial',
-                data: $('form').serialize(),
+                data: $('#materials :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
@@ -225,7 +225,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/Specification/Edit/AddInterview',
-                data: $('form').serialize(),
+                data: $('#interviews :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
@@ -240,7 +240,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/Specification/Edit/DeleteInterview',
-                data: $('form').serialize(),
+                data: $('#interviews :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
@@ -254,7 +254,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/Specification/Edit/AddCast',
-                data: $('form').serialize(),
+                data: $('#casts :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
@@ -269,7 +269,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/Specification/Edit/DeleteCast',
-                data: $('form').serialize(),
+                data: $('#casts :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
