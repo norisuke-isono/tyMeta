@@ -1,0 +1,73 @@
+@model Web.Pages_Specification.EditModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Affiliation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].UseSearch)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].JobTitle)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Product)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].ContactAddress)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Note)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Address)
+            </th>                            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(var i=0; i<Model.SpecificationViewModel.InterviewViewModels.Count(); i++)
+        {
+            <tr>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Affiliation" />
+                </td>
+                <td>
+                    <input type="checkbox" class="form-check-input" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].UseSearch">
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Name" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].JobTitle" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Product" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].ContactAddress" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Note" />
+                </td>
+                <td>
+                    <input class="form-control" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Address" />
+                </td>
+                <input class="dead-flag" type="hidden" asp-for="@Model.SpecificationViewModel.InterviewViewModels[i].Dead" value="false" />
+                <td>
+                    <span class="remove">
+                        <button type="button" class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;削除
+                        </button>
+                    </span>
+                </td>
+            </tr> 
+        }
+        </tr>
+    </tbody>
+</table>
