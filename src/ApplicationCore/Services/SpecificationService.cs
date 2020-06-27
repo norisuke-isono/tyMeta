@@ -28,6 +28,7 @@ namespace ApplicationCore.Services
                     .ThenInclude(Schedule => Schedule.Corner)
                 .Include(spec => spec.SpecificationVideoSources)
                 .Include(spec => spec.SpecificationArticleSources)
+                .Include(spec => spec.SpecificationMaterialSources)
                 .SingleOrDefaultAsync(spec => spec.Id == specificationId);
 
             return specification;
@@ -38,6 +39,7 @@ namespace ApplicationCore.Services
             var entity = await _context.Specifications
                 .Include(x => x.SpecificationVideoSources)
                 .Include(x => x.SpecificationArticleSources)
+                .Include(x => x.SpecificationMaterialSources)
                 .SingleOrDefaultAsync(x => x.Id == Specification.Id);
 
             if (entity == null)
@@ -50,6 +52,7 @@ namespace ApplicationCore.Services
             entity.Desk = Specification.Desk;
             entity.SpecificationVideoSources = Specification.SpecificationVideoSources;
             entity.SpecificationArticleSources = Specification.SpecificationArticleSources;
+            entity.SpecificationMaterialSources = Specification.SpecificationMaterialSources;
 
             await _context.SaveChangesAsync();
         }

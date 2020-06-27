@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Entites;
+using ApplicationCore.Enums;
 using ApplicationCore.Interfaces;
 using ApplicationCore.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -61,6 +62,15 @@ namespace Web.Services
                         Selected = specification.SpecificationArticleSources
                             .Any(sa => sa.ArticleSourceId == x.Id)
                     }).ToList(),
+                MaterialSourceViewModels = specification.SpecificationMaterialSources
+                    .Select(x => new SpecificationMaterialSourceViewModel
+                    {
+                        Type = x.Type,
+                        CopyrightHolder = x.CopyrightHolder,
+                        ConditionsOfUse = x.ConditionsOfUse,
+                        Note = x.Note,
+                        Dead = false
+                    }).ToList()
             };
 
             return viewModel;
@@ -117,6 +127,14 @@ namespace Web.Services
                     {
                         ArticleSourceId = int.Parse(x.Value),
                     }).ToList(),
+                SpecificationMaterialSources = viewModel.MaterialSourceViewModels
+                    .Select(x => new SpecificationMaterialSource
+                    {
+                        Type = (MaterialType)x.Type,
+                        CopyrightHolder = x.CopyrightHolder,
+                        ConditionsOfUse = x.ConditionsOfUse,
+                        Note = x.Note
+                    }).ToList()
             };
 
             await _specificationService.UpdateSpecificationAsync(specification);

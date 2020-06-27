@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Web.ViewModels;
 using Web.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Web.Pages_Specification
 {
@@ -41,6 +44,31 @@ namespace Web.Pages_Specification
                 .UpdateSpecificationFrom(SpecificationViewModel);
 
             return RedirectToPage("/Schedules/Index");
+        }
+
+        public IActionResult OnPostAddMaterial()
+        {
+            if (SpecificationViewModel.MaterialSourceViewModels == null)
+            {
+                SpecificationViewModel.MaterialSourceViewModels =
+                    new[] { new SpecificationMaterialSourceViewModel() }.ToList();
+            }
+            else
+            {
+                this.SpecificationViewModel.MaterialSourceViewModels
+                    .Add(new SpecificationMaterialSourceViewModel());
+            }
+
+            return Partial("_MaterialSource", this);
+        }
+
+        public IActionResult OnPostDeleteMaterial()
+        {
+            this.SpecificationViewModel.MaterialSourceViewModels = SpecificationViewModel
+                .MaterialSourceViewModels.Where(x => !x.Dead).ToList();
+
+            ModelState.Clear();
+            return Partial("_MaterialSource", this);
         }
     }
 }

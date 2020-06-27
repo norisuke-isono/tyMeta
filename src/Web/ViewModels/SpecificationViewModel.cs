@@ -36,5 +36,8 @@ namespace Web.ViewModels
 
         [Display(Name = "原稿ソース")]
         public List<SelectListItem> ArticleSourceSelectItems { get; set; }
+
+        [Display(Name = "素材ソース")]
+        public List<SpecificationMaterialSourceViewModel> MaterialSourceViewModels { get; set; }
     }
 }
