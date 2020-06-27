@@ -31,6 +31,18 @@ namespace Web.ViewModels
         [Display(Name = "担当デスク")]
         public string Desk { get; set; }
 
+        [Display(Name = "タグ")]
+        public string Tag { get; set; }
+
+        [Display(Name = "キーワード")]
+        public string Keyword { get; set; }
+
+        [Display(Name = "映像ソース備考")]
+        public string VideoSourceNote { get; set; }
+
+        [Display(Name = "原稿ソース備考")]
+        public string ArticleSourceNote { get; set; }
+
         [Display(Name = "カテゴリー")]
         public List<SelectListItem> CategorySelectItems { get; set; }
 

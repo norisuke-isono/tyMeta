@@ -56,6 +56,10 @@ namespace ApplicationCore.Services
             entity.Text = Specification.Text;
             entity.Director = Specification.Director;
             entity.Desk = Specification.Desk;
+            entity.Tag = Specification.Tag;
+            entity.Keyword = Specification.Keyword;
+            entity.VideoSourceNote = Specification.VideoSourceNote;
+            entity.ArticleSourceNote = Specification.ArticleSourceNote;
             entity.SpecificationCategories = Specification.SpecificationCategories;
             entity.SpecificationVideoSources = Specification.SpecificationVideoSources;
             entity.SpecificationArticleSources = Specification.SpecificationArticleSources;

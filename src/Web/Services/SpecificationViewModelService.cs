@@ -50,6 +50,10 @@ namespace Web.Services
                 Text = specification.Text,
                 Director = specification.Director,
                 Desk = specification.Desk,
+                Tag = specification.Tag,
+                Keyword = specification.Keyword,
+                VideoSourceNote = specification.VideoSourceNote,
+                ArticleSourceNote = specification.ArticleSourceNote,
                 CategorySelectItems = categories.Select(x =>
                     new SelectListItem
                     {
@@ -150,6 +154,10 @@ namespace Web.Services
                 Text = viewModel.Text,
                 Director = viewModel.Director,
                 Desk = viewModel.Desk,
+                Tag = viewModel.Tag,
+                Keyword = viewModel.Keyword,
+                VideoSourceNote = viewModel.VideoSourceNote,
+                ArticleSourceNote = viewModel.ArticleSourceNote,
                 SpecificationCategories = viewModel.CategorySelectItems
                     .Where(x => x.Selected)
                     .Select(x => new SpecificationCategory
