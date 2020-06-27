@@ -70,5 +70,31 @@ namespace Web.Pages_Specification
             ModelState.Clear();
             return Partial("_MaterialSource", this);
         }
+
+        public IActionResult OnPostAddInterview()
+        {
+            if (SpecificationViewModel.InterviewViewModels == null)
+            {
+                SpecificationViewModel.InterviewViewModels =
+                    new[] { new SpecificationInterviewViewModel() }.ToList();
+            }
+            else
+            {
+                this.SpecificationViewModel.InterviewViewModels
+                    .Add(new SpecificationInterviewViewModel());
+            }
+
+            return Partial("_Interview", this);
+        }
+
+        public IActionResult OnPostDeleteInterview()
+        {
+            this.SpecificationViewModel.InterviewViewModels = SpecificationViewModel
+                .InterviewViewModels.Where(x => !x.Dead).ToList();
+
+            ModelState.Clear();
+            return Partial("_Interview", this);
+        }
+
     }
 }

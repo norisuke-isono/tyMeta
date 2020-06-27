@@ -70,6 +70,19 @@ namespace Web.Services
                         ConditionsOfUse = x.ConditionsOfUse,
                         Note = x.Note,
                         Dead = false
+                    }).ToList(),
+                InterviewViewModels = specification.SpecificationInterviews
+                    .Select(x => new SpecificationInterviewViewModel
+                    {
+                        Name = x.Name,
+                        Affiliation = x.Affiliation,
+                        JobTitle = x.JobTitle,
+                        Product = x.Product,
+                        ContactAddress = x.ContactAddress,
+                        Note = x.Note,
+                        Address = x.Address,
+                        UseSearch = x.UseSearch,
+                        Dead = false
                     }).ToList()
             };
 
@@ -134,6 +147,18 @@ namespace Web.Services
                         CopyrightHolder = x.CopyrightHolder,
                         ConditionsOfUse = x.ConditionsOfUse,
                         Note = x.Note
+                    }).ToList(),
+                SpecificationInterviews = viewModel.InterviewViewModels
+                    .Select(x => new SpecificationInterview
+                    {
+                        Name = x.Name,
+                        Affiliation = x.Affiliation,
+                        JobTitle = x.JobTitle,
+                        Product = x.Product,
+                        ContactAddress = x.ContactAddress,
+                        Note = x.Note,
+                        Address = x.Address,
+                        UseSearch = x.UseSearch,
                     }).ToList()
             };
 

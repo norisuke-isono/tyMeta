@@ -39,5 +39,8 @@ namespace Web.ViewModels
 
         [Display(Name = "素材ソース")]
         public List<SpecificationMaterialSourceViewModel> MaterialSourceViewModels { get; set; }
+
+        [Display(Name = "取材先")]
+        public List<SpecificationInterviewViewModel> InterviewViewModels { get; set; }
     }
 }
