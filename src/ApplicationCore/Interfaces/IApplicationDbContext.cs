@@ -17,6 +17,7 @@ namespace ApplicationCore.Interfaces
         DbSet<Specification> Specifications { get; set; }
         DbSet<SpecificationVideoSource> SpecificationVideoSources { get; set; }
         DbSet<SpecificationArticleSource> SpecificationArticleSources { get; set; }
+        DbSet<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

@@ -25,5 +25,7 @@ namespace ApplicationCore.Entites
         public List<SpecificationVideoSource> SpecificationVideoSources { get; set; }
 
         public List<SpecificationArticleSource> SpecificationArticleSources { get; set; }
+
+        public List<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }
     }
 }
