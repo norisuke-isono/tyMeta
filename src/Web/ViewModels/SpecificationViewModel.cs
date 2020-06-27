@@ -31,6 +31,9 @@ namespace Web.ViewModels
         [Display(Name = "担当デスク")]
         public string Desk { get; set; }
 
+        [Display(Name = "カテゴリー")]
+        public List<SelectListItem> CategorySelectItems { get; set; }
+
         [Display(Name = "映像ソース")]
         public List<SelectListItem> VideoSourceSelectItems { get; set; }
 

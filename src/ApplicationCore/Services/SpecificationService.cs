@@ -26,6 +26,7 @@ namespace ApplicationCore.Services
                         .ThenInclude(Broadcast => Broadcast.TvProgram)
                 .Include(spec => spec.Schedule)
                     .ThenInclude(Schedule => Schedule.Corner)
+                .Include(spec => spec.SpecificationCategories)
                 .Include(spec => spec.SpecificationVideoSources)
                 .Include(spec => spec.SpecificationArticleSources)
                 .Include(spec => spec.SpecificationMaterialSources)
@@ -39,6 +40,7 @@ namespace ApplicationCore.Services
         public async Task UpdateSpecificationAsync(Specification Specification)
         {
             var entity = await _context.Specifications
+                .Include(x => x.SpecificationCategories)
                 .Include(x => x.SpecificationVideoSources)
                 .Include(x => x.SpecificationArticleSources)
                 .Include(x => x.SpecificationMaterialSources)
@@ -54,6 +56,7 @@ namespace ApplicationCore.Services
             entity.Text = Specification.Text;
             entity.Director = Specification.Director;
             entity.Desk = Specification.Desk;
+            entity.SpecificationCategories = Specification.SpecificationCategories;
             entity.SpecificationVideoSources = Specification.SpecificationVideoSources;
             entity.SpecificationArticleSources = Specification.SpecificationArticleSources;
             entity.SpecificationMaterialSources = Specification.SpecificationMaterialSources;

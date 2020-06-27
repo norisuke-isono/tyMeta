@@ -15,15 +15,18 @@ namespace Web.Services
     public class SpecificationViewModelService : ISpecificationViewModelService
     {
         private readonly ISpecificationService _specificationService;
+        private readonly ICategoryService _categoryService;
         private readonly IVideoSourceService _videoSourceService;
         private readonly IArticleSourceService _articleSourceService;
 
         public SpecificationViewModelService(
             ISpecificationService specificationService,
+            ICategoryService categoryService,
             IVideoSourceService videoSourceService,
             IArticleSourceService articleSourceService)
         {
             _specificationService = specificationService;
+            _categoryService = categoryService;
             _videoSourceService = videoSourceService;
             _articleSourceService = articleSourceService;
         }
@@ -33,6 +36,7 @@ namespace Web.Services
             var specification = await _specificationService.FindSpecificationAsync(specificationId);
             if (specification == null) return null;
 
+            var categories = await _categoryService.GetCategoriesAsync();
             var videoSources = await _videoSourceService.GetVideoSourcesAsync();
             var articleSources = await _articleSourceService.GetArticleSourcesAsync();
 
@@ -46,6 +50,14 @@ namespace Web.Services
                 Text = specification.Text,
                 Director = specification.Director,
                 Desk = specification.Desk,
+                CategorySelectItems = categories.Select(x =>
+                    new SelectListItem
+                    {
+                        Text = x.Name,
+                        Value = x.Id.ToString(),
+                        Selected = specification.SpecificationCategories
+                            .Any(sv => sv.CategoryId == x.Id)
+                    }).ToList(),
                 VideoSourceSelectItems = videoSources.Select(x =>
                     new SelectListItem
                     {
@@ -138,6 +150,12 @@ namespace Web.Services
                 Text = viewModel.Text,
                 Director = viewModel.Director,
                 Desk = viewModel.Desk,
+                SpecificationCategories = viewModel.CategorySelectItems
+                    .Where(x => x.Selected)
+                    .Select(x => new SpecificationCategory
+                    {
+                        CategoryId = int.Parse(x.Value),
+                    }).ToList(),
                 SpecificationVideoSources = viewModel.VideoSourceSelectItems
                     .Where(x => x.Selected)
                     .Select(x => new SpecificationVideoSource
