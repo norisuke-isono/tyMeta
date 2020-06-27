@@ -117,7 +117,21 @@
                 @await Html.PartialAsync("_Interview", Model)
             </div>
         </div>
-    </div>    
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">出演者</h5>
+        <div class="card-body">
+            <div class="form-group row">
+                <button id="add-cast-button" type="button" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;追加
+                </button>
+            </div>
+            <div id="casts">
+                @await Html.PartialAsync("_Cast", Model)
+            </div>
+        </div>
+    </div>
 
     <input type="hidden" asp-for="SpecificationViewModel.SpecificationId" />
     <div class="form-group">
@@ -187,7 +201,36 @@
                 success: function(partialView){
                     $('#interviews').html(partialView);
                 }
+            });
+        });
+
+        $("#add-cast-button").on('click', function(){
+            $.ajax({
+                type: 'POST',
+                url: '/Specification/Edit/AddCast',
+                data: $('form').serialize(),
+                headers: {
+                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function(partialView){
+                    $('#casts').html(partialView);
+                }
+            });
+        });
+
+        $("#casts").on('click', '.remove', function(){
+            $(this).parents('tr').children(".dead-flag").val("true");
+            $.ajax({
+                type: 'POST',
+                url: '/Specification/Edit/DeleteCast',
+                data: $('form').serialize(),
+                headers: {
+                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function(partialView){
+                    $('#casts').html(partialView);
+                }
             });            
-        });        
+        });      
     </script>
 }

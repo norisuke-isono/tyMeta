@@ -96,5 +96,29 @@ namespace Web.Pages_Specification
             return Partial("_Interview", this);
         }
 
+        public IActionResult OnPostAddCast()
+        {
+            if (SpecificationViewModel.CastViewModels == null)
+            {
+                SpecificationViewModel.CastViewModels =
+                    new[] { new SpecificationCastViewModel() }.ToList();
+            }
+            else
+            {
+                this.SpecificationViewModel.CastViewModels
+                    .Add(new SpecificationCastViewModel());
+            }
+
+            return Partial("_Cast", this);
+        }
+
+        public IActionResult OnPostDeleteCast()
+        {
+            this.SpecificationViewModel.CastViewModels = SpecificationViewModel
+                .CastViewModels.Where(x => !x.Dead).ToList();
+
+            ModelState.Clear();
+            return Partial("_Cast", this);
+        }
     }
 }

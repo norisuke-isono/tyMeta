@@ -83,6 +83,16 @@ namespace Web.Services
                         Address = x.Address,
                         UseSearch = x.UseSearch,
                         Dead = false
+                    }).ToList(),
+                CastViewModels = specification.SpecificationCasts
+                    .Select(x => new SpecificationCastViewModel
+                    {
+                        Name = x.Name,
+                        Affiliation = x.Affiliation,
+                        JobTitle = x.JobTitle,
+                        ContactAddress = x.ContactAddress,
+                        Note = x.Note,
+                        Dead = false
                     }).ToList()
             };
 
@@ -159,6 +169,15 @@ namespace Web.Services
                         Note = x.Note,
                         Address = x.Address,
                         UseSearch = x.UseSearch,
+                    }).ToList(),
+                SpecificationCasts = viewModel.CastViewModels
+                    .Select(x => new SpecificationCast
+                    {
+                        Name = x.Name,
+                        Affiliation = x.Affiliation,
+                        JobTitle = x.JobTitle,
+                        ContactAddress = x.ContactAddress,
+                        Note = x.Note,
                     }).ToList()
             };
 

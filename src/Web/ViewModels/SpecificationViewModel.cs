@@ -42,5 +42,8 @@ namespace Web.ViewModels
 
         [Display(Name = "取材先")]
         public List<SpecificationInterviewViewModel> InterviewViewModels { get; set; }
+
+        [Display(Name = "出演者")]
+        public List<SpecificationCastViewModel> CastViewModels { get; set; }
     }
 }
