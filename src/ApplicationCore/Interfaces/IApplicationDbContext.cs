@@ -12,9 +12,11 @@ namespace ApplicationCore.Interfaces
         DbSet<Broadcast> Broadcasts { get; set; }
         DbSet<BaseSchedule> BaseSchedules { get; set; }
         DbSet<Schedule> Schedules { get; set; }
+        DbSet<Specification> Specifications { get; set; }
+        DbSet<Category> Categories { get; set; }
         DbSet<VideoSource> VideoSources { get; set; }
         DbSet<ArticleSource> ArticleSources { get; set; }
-        DbSet<Specification> Specifications { get; set; }
+        DbSet<SpecificationCategory> SpecificationCategories { get; set; }
         DbSet<SpecificationVideoSource> SpecificationVideoSources { get; set; }
         DbSet<SpecificationArticleSource> SpecificationArticleSources { get; set; }
         DbSet<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }

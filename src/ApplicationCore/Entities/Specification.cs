@@ -22,6 +22,8 @@ namespace ApplicationCore.Entites
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
 
+        public List<SpecificationCategory> SpecificationCategories { get; set; }
+
         public List<SpecificationVideoSource> SpecificationVideoSources { get; set; }
 
         public List<SpecificationArticleSource> SpecificationArticleSources { get; set; }

@@ -20,8 +20,10 @@ namespace Infrastructure.Data
         public DbSet<BaseSchedule> BaseSchedules { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Specification> Specifications { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<VideoSource> VideoSources { get; set; }
         public DbSet<ArticleSource> ArticleSources { get; set; }
+        public DbSet<SpecificationCategory> SpecificationCategories { get; set; }
         public DbSet<SpecificationVideoSource> SpecificationVideoSources { get; set; }
         public DbSet<SpecificationArticleSource> SpecificationArticleSources { get; set; }
         public DbSet<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }
@@ -35,6 +37,17 @@ namespace Infrastructure.Data
 
             // NOTE: EFcore3.1では多対多で中間テーブル用のEntityを手動で定義する必要がある。
             // https://docs.microsoft.com/ja-jp/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key#many-to-many
+            modelBuilder.Entity<SpecificationCategory>()
+                .HasKey(x => new { x.SpecificationId, x.CategoryId });
+            modelBuilder.Entity<SpecificationCategory>()
+                .HasOne(x => x.Specification)
+                .WithMany(x => x.SpecificationCategories)
+                .HasForeignKey(x => x.SpecificationId);
+            modelBuilder.Entity<SpecificationCategory>()
+                .HasOne(x => x.Category)
+                .WithMany(x => x.SpecificationCategories)
+                .HasForeignKey(x => x.CategoryId);
+
             modelBuilder.Entity<SpecificationVideoSource>()
                 .HasKey(x => new { x.SpecificationId, x.VideoSourceId });
             modelBuilder.Entity<SpecificationVideoSource>()
