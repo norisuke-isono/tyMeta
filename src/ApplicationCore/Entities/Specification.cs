@@ -27,5 +27,7 @@ namespace ApplicationCore.Entites
         public List<SpecificationArticleSource> SpecificationArticleSources { get; set; }
 
         public List<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }
+
+        public List<SpecificationInterview> SpecificationInterviews { get; set; }
     }
 }
