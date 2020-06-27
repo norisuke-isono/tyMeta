@@ -169,15 +169,15 @@ namespace Web.Services
                         ArticleSourceId = int.Parse(x.Value),
                     }).ToList(),
                 SpecificationMaterialSources = viewModel.MaterialSourceViewModels
-                    .Select(x => new SpecificationMaterialSource
+                    ?.Select(x => new SpecificationMaterialSource
                     {
                         Type = (MaterialType)x.Type,
                         CopyrightHolder = x.CopyrightHolder,
                         ConditionsOfUse = x.ConditionsOfUse,
                         Note = x.Note
-                    }).ToList(),
+                    })?.ToList(),
                 SpecificationInterviews = viewModel.InterviewViewModels
-                    .Select(x => new SpecificationInterview
+                    ?.Select(x => new SpecificationInterview
                     {
                         Name = x.Name,
                         Affiliation = x.Affiliation,
@@ -187,16 +187,16 @@ namespace Web.Services
                         Note = x.Note,
                         Address = x.Address,
                         UseSearch = x.UseSearch,
-                    }).ToList(),
+                    })?.ToList(),
                 SpecificationCasts = viewModel.CastViewModels
-                    .Select(x => new SpecificationCast
+                    ?.Select(x => new SpecificationCast
                     {
                         Name = x.Name,
                         Affiliation = x.Affiliation,
                         JobTitle = x.JobTitle,
                         ContactAddress = x.ContactAddress,
                         Note = x.Note,
-                    }).ToList()
+                    })?.ToList()
             };
 
             await _specificationService.UpdateSpecificationAsync(specification);
