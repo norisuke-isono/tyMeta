@@ -19,6 +19,7 @@ namespace ApplicationCore.Interfaces
         DbSet<SpecificationArticleSource> SpecificationArticleSources { get; set; }
         DbSet<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }
         DbSet<SpecificationInterview> SpecificationInterviews { get; set; }
+        DbSet<SpecificationCast> SpecificationCasts { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

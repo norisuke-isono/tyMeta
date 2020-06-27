@@ -26,6 +26,7 @@ namespace Infrastructure.Data
         public DbSet<SpecificationArticleSource> SpecificationArticleSources { get; set; }
         public DbSet<SpecificationMaterialSource> SpecificationMaterialSources { get; set; }
         public DbSet<SpecificationInterview> SpecificationInterviews { get; set; }
+        public DbSet<SpecificationCast> SpecificationCasts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
