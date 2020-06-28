@@ -54,6 +54,7 @@ namespace Web.Services
                 Keyword = specification.Keyword,
                 VideoSourceNote = specification.VideoSourceNote,
                 ArticleSourceNote = specification.ArticleSourceNote,
+                DeskCheck = specification.DeskCheck,
                 CategorySelectItems = categories.Select(x =>
                     new SelectListItem
                     {
@@ -158,6 +159,7 @@ namespace Web.Services
                 Keyword = viewModel.Keyword,
                 VideoSourceNote = viewModel.VideoSourceNote,
                 ArticleSourceNote = viewModel.ArticleSourceNote,
+                DeskCheck = viewModel.DeskCheck,
                 SpecificationCategories = viewModel.CategorySelectItems
                     .Where(x => x.Selected)
                     .Select(x => new SpecificationCategory

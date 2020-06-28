@@ -60,6 +60,7 @@ namespace ApplicationCore.Services
             entity.Keyword = Specification.Keyword;
             entity.VideoSourceNote = Specification.VideoSourceNote;
             entity.ArticleSourceNote = Specification.ArticleSourceNote;
+            entity.DeskCheck = Specification.DeskCheck;
             entity.SpecificationCategories = Specification.SpecificationCategories;
             entity.SpecificationVideoSources = Specification.SpecificationVideoSources;
             entity.SpecificationArticleSources = Specification.SpecificationArticleSources;

@@ -43,6 +43,9 @@ namespace Web.ViewModels
         [Display(Name = "原稿ソース備考")]
         public string ArticleSourceNote { get; set; }
 
+        [Display(Name = "デスクチェック")]
+        public bool DeskCheck { get; set; }
+
         [Display(Name = "カテゴリー")]
         public List<SelectListItem> CategorySelectItems { get; set; }
 
