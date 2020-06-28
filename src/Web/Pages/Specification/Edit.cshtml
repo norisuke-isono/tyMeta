@@ -6,15 +6,48 @@
 }
 
 <h4>明細入力</h4>
-<h5>@Model.SpecificationViewModel.AirDate.ToString("yyyy/MM/dd") 放送　@Model.SpecificationViewModel.TvProgramName</h5>
 <hr />
 
-<form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="d-flex flex-row">
+    <a asp-page="/Schedules/Index" class="text-dark">
+        <h5>@Model.SpecificationViewModel.AirDate.ToString("yyyy/MM/dd") 放送　@Model.SpecificationViewModel.TvProgramName</h5>
+    </a>
+    @* <p class="ml-auto text-secondary font-weight-light">最終更新日時: @Model.SpecificationViewModel.UpdatedAt.ToString("yyyy/MM/dd hh:mm:ss")</p> *@
+</div>
 
-    <div class="card">
-        <h5 class="card-header">基本情報</h5>
-        <div class="card-body">
+<form method="post" id="specification-form">
+
+    <ul class="nav nav-tabs" id="specification" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link text-dark active" id="basic-tab" data-toggle="tab" href="#basic-content">基本情報</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="source-tab" data-toggle="tab" href="#source-content">ニュースソース</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="interview-tab" data-toggle="tab" href="#interview-content">取材先</a>
+        </li>
+        <li class="nav-item mr-auto">
+            <a class="nav-link text-dark" id="cast-tab" data-toggle="tab" href="#cast-content">出演者</a>
+        </li>
+        <li class="d-flex align-items-center mr-3">
+            <div class="form-check">
+                <input asp-for="SpecificationViewModel.DeskCheck" type="checkbox" class="form-check-input" >
+                <label asp-for="SpecificationViewModel.DeskCheck" class="form-check-label"></label>
+            </div>
+        </li>
+        <li>
+            <button type="submit" form="specification-form" class="btn btn-primary">
+                <i class="fa fa-save" aria-hidden="true"></i>&nbsp;保存
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="tab-pane fade show active m-3" id="basic-content">
+            
             <div class="form-group row">
                 <label asp-for="SpecificationViewModel.CornerName" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-4">
@@ -81,16 +114,10 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="form-check">
-                <input asp-for="SpecificationViewModel.DeskCheck" type="checkbox" class="form-check-input" >
-                <label asp-for="SpecificationViewModel.DeskCheck" class="form-check-label"></label>
-            </div>
-        </div>
-    </div>
 
-    <div class="card">
-        <h5 class="card-header">ニュースソース</h5>
-        <div class="card-body">
+        </div>
+        <div class="tab-pane fade m-3" id="source-content">
+
             <fieldset class="form-group">
                 <div class="row">
                     <label asp-for="SpecificationViewModel.VideoSourceSelectItems" class="col-sm-2 col-form-label"></label>
@@ -110,12 +137,13 @@
                 </div>
             </fieldset>
             <div class="form-group row">
-                <label asp-for="SpecificationViewModel.VideoSourceNote" class="col-sm-2 col-form-label"></label>
+                <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <textarea asp-for="SpecificationViewModel.VideoSourceNote" class="form-control" rows="4" cols="60"></textarea>
+                    <textarea asp-for="SpecificationViewModel.VideoSourceNote" class="form-control" rows="4" cols="60" placeholder="備考"></textarea>
                 </div>
                 <span asp-validation-for="SpecificationViewModel.VideoSourceNote" class="text-danger"></span>
             </div>
+
             <fieldset class="form-group">
                 <div class="row">
                     <label asp-for="SpecificationViewModel.ArticleSourceSelectItems" class="col-sm-2 col-form-label"></label>
@@ -135,64 +163,120 @@
                 </div>
             </fieldset>
             <div class="form-group row">
-                <label asp-for="SpecificationViewModel.ArticleSourceNote" class="col-sm-2 col-form-label"></label>
+                <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <textarea asp-for="SpecificationViewModel.ArticleSourceNote" class="form-control" rows="4" cols="60"></textarea>
+                    <textarea asp-for="SpecificationViewModel.ArticleSourceNote" class="form-control" rows="4" cols="60" placeholder="備考"></textarea>
                 </div>
                 <span asp-validation-for="SpecificationViewModel.ArticleSourceNote" class="text-danger"></span>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">素材</label>
-                <button id="add-material-button" type="button" class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;追加
-                </button>
-            </div>
-            <div id="materials">
-                @await Html.PartialAsync("_MaterialSource", Model)
-            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].Type)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].CopyrightHolder)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].ConditionsOfUse)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].Note)
+                        </th>
+                        <th>
+                            <button id="add-material-button" type="button" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="materials">
+                    @await Html.PartialAsync("_MaterialSource", Model)
+                </tbody>
+            </table>
 
         </div>
-    </div>
+        <div class="tab-pane fade" id="interview-content">
 
-    <div class="card">
-        <h5 class="card-header">取材先</h5>
-        <div class="card-body">
-            <div class="form-group row">
-                <button id="add-interview-button" type="button" class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;追加
-                </button>
-            </div>
-            <div id="interviews">
-                @await Html.PartialAsync("_Interview", Model)
-            </div>
+            <table class="table borderless-top ">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Affiliation)
+                        </th>
+                        @* <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].UseSearch)
+                        </th> *@
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Name)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].JobTitle)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Product)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].ContactAddress)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Note)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Address)
+                        </th>                            
+                        <th>
+                            <button id="add-interview-button" type="button" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="interviews">
+                    @await Html.PartialAsync("_Interview", Model)
+                </tbody>
+            </table>
+
         </div>
-    </div>
+        <div class="tab-pane fade" id="cast-content">
 
-    <div class="card">
-        <h5 class="card-header">出演者</h5>
-        <div class="card-body">
-            <div class="form-group row">
-                <button id="add-cast-button" type="button" class="btn btn-primary btn-sm">
-                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;追加
-                </button>
-            </div>
-            <div id="casts">
-                @await Html.PartialAsync("_Cast", Model)
-            </div>
+            <table class="table borderless-top ">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].Name)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].JobTitle)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].Affiliation)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].ContactAddress)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].Note)
+                        </th>
+                        <th>
+                            <button id="add-cast-button" type="button" class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="casts">
+                    @await Html.PartialAsync("_Cast", Model)
+                </tbody>
+            </table>
+
         </div>
     </div>
 
     <input type="hidden" asp-for="SpecificationViewModel.SpecificationId" />
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-    </div>
 </form>
-
-<div>
-    <a asp-page="/Schedules/Index">Back to List</a>
-</div>
-
 
 @section Scripts{
     <script>

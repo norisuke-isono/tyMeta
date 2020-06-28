@@ -46,6 +46,9 @@ namespace Web.ViewModels
         [Display(Name = "デスクチェック")]
         public bool DeskCheck { get; set; }
 
+        [Display(Name = "最終更新日時")]
+        public DateTime UpdatedAt { get; set; }
+
         [Display(Name = "カテゴリー")]
         public List<SelectListItem> CategorySelectItems { get; set; }
 

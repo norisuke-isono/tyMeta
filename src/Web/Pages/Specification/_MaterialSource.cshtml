@@ -1,56 +1,34 @@
 @using ApplicationCore.Enums
 @model Web.Pages_Specification.EditModel
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].Type)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].CopyrightHolder)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].ConditionsOfUse)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.SpecificationViewModel.MaterialSourceViewModels[0].Note)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(var i=0; i<Model.SpecificationViewModel.MaterialSourceViewModels.Count(); i++)
-        {
-            <tr>
-                <td>
-                    <select 
-                        class="form-control"
-                        asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].Type" 
-                        asp-items="Html.GetEnumSelectList<MaterialType>()"
-                    >
-                        <option selected="selected" value="">選択してください</option>
-                    </select>
-                </td>
-                <td>
-                    <input class="form-control" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].CopyrightHolder" />
-                </td>
-                <td>
-                    <input class="form-control" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].ConditionsOfUse" />
-                </td>
-                <td>
-                    <input class="form-control" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].Note" />
-                </td>
-                <input class="dead-flag" type="hidden" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].Dead" value="false" />
-                <td>
-                    <span class="remove">
-                        <button type="button" class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;削除
-                        </button>
-                    </span>
-                </td>
-            </tr> 
-        }
-        </tr>
-    </tbody>
-</table>
+@for(var i=0; i<Model.SpecificationViewModel.MaterialSourceViewModels.Count(); i++)
+{
+    <tr>
+        <td>
+            <select 
+                class="form-control"
+                asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].Type" 
+                asp-items="Html.GetEnumSelectList<MaterialType>()"
+            >
+                <option selected="selected" value="">選択してください</option>
+            </select>
+        </td>
+        <td>
+            <input class="form-control" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].CopyrightHolder" />
+        </td>
+        <td>
+            <input class="form-control" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].ConditionsOfUse" />
+        </td>
+        <td>
+            <input class="form-control" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].Note" />
+        </td>
+        <input class="dead-flag" type="hidden" asp-for="@Model.SpecificationViewModel.MaterialSourceViewModels[i].Dead" value="false" />
+        <td>
+            <span class="remove">
+                <button type="button" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+            </span>
+        </td>
+    </tr> 
+}

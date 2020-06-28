@@ -55,6 +55,7 @@ namespace Web.Services
                 VideoSourceNote = specification.VideoSourceNote,
                 ArticleSourceNote = specification.ArticleSourceNote,
                 DeskCheck = specification.DeskCheck,
+                UpdatedAt = specification.UpdatedAt,
                 CategorySelectItems = categories.Select(x =>
                     new SelectListItem
                     {
