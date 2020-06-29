@@ -68,91 +68,45 @@
 
 @section Scripts{
     <script>
-        $("#add-material-button").on('click', function(){
+        $('#add-material-button').on('click', function(){
+            updateDom('#materials','/Specification/Edit/AddMaterial');
+        });
+
+        $('#materials').on('click', '.remove', function(){
+            $(this).parents('tr').children('.dead-flag').val('true');
+            updateDom('#materials','/Specification/Edit/DeleteMaterial');          
+        });
+
+        $('#add-interview-button').on('click', function(){
+            updateDom('#interviews','/Specification/Edit/AddInterview');
+        });
+
+        $('#interviews').on('click', '.remove', function(){
+            $(this).parents('tr').children('.dead-flag').val('true');
+            updateDom('#interviews','/Specification/Edit/DeleteInterview');
+        });
+
+        $('#add-cast-button').on('click', function(){
+            updateDom('#casts','/Specification/Edit/AddCast');
+        });
+
+        $('#casts').on('click', '.remove', function(){
+            $(this).parents('tr').children('.dead-flag').val('true');
+            updateDom('#casts','/Specification/Edit/DeleteCast');
+        });
+
+        function updateDom(target, url){
             $.ajax({
                 type: 'POST',
-                url: '/Specification/Edit/AddMaterial',
-                data: $('#materials :input').serialize(),
+                url: url,
+                data: $(target + ' :input').serialize(),
                 headers: {
                     RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                 },
                 success: function(partialView){
-                    $('#materials').html(partialView);
+                    $(target).html(partialView);
                 }
             });
-        });
-
-        $("#materials").on('click', '.remove', function(){
-            $(this).parents('tr').children(".dead-flag").val("true");
-            $.ajax({
-                type: 'POST',
-                url: '/Specification/Edit/DeleteMaterial',
-                data: $('#materials :input').serialize(),
-                headers: {
-                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(partialView){
-                    $('#materials').html(partialView);
-                }
-            });            
-        });
-
-        $("#add-interview-button").on('click', function(){
-            $.ajax({
-                type: 'POST',
-                url: '/Specification/Edit/AddInterview',
-                data: $('#interviews :input').serialize(),
-                headers: {
-                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(partialView){
-                    $('#interviews').html(partialView);
-                }
-            });
-        });
-
-        $("#interviews").on('click', '.remove', function(){
-            $(this).parents('tr').children(".dead-flag").val("true");
-            $.ajax({
-                type: 'POST',
-                url: '/Specification/Edit/DeleteInterview',
-                data: $('#interviews :input').serialize(),
-                headers: {
-                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(partialView){
-                    $('#interviews').html(partialView);
-                }
-            });
-        });
-
-        $("#add-cast-button").on('click', function(){
-            $.ajax({
-                type: 'POST',
-                url: '/Specification/Edit/AddCast',
-                data: $('#casts :input').serialize(),
-                headers: {
-                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(partialView){
-                    $('#casts').html(partialView);
-                }
-            });
-        });
-
-        $("#casts").on('click', '.remove', function(){
-            $(this).parents('tr').children(".dead-flag").val("true");
-            $.ajax({
-                type: 'POST',
-                url: '/Specification/Edit/DeleteCast',
-                data: $('#casts :input').serialize(),
-                headers: {
-                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(partialView){
-                    $('#casts').html(partialView);
-                }
-            });            
-        });      
+        }
     </script>
 }
