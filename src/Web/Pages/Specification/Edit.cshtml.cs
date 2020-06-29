@@ -59,7 +59,7 @@ namespace Web.Pages_Specification
                     .Add(new SpecificationMaterialSourceViewModel());
             }
 
-            return Partial("_MaterialSource", this);
+            return Partial("_MaterialSources", this);
         }
 
         public IActionResult OnPostDeleteMaterial()
@@ -68,7 +68,7 @@ namespace Web.Pages_Specification
                 .MaterialSourceViewModels.Where(x => !x.Dead).ToList();
 
             ModelState.Clear();
-            return Partial("_MaterialSource", this);
+            return Partial("_MaterialSources", this);
         }
 
         public IActionResult OnPostAddInterview()
@@ -84,7 +84,7 @@ namespace Web.Pages_Specification
                     .Add(new SpecificationInterviewViewModel());
             }
 
-            return Partial("_Interview", this);
+            return Partial("_Interviews", this);
         }
 
         public IActionResult OnPostDeleteInterview()
@@ -93,7 +93,7 @@ namespace Web.Pages_Specification
                 .InterviewViewModels.Where(x => !x.Dead).ToList();
 
             ModelState.Clear();
-            return Partial("_Interview", this);
+            return Partial("_Interviews", this);
         }
 
         public IActionResult OnPostAddCast()
@@ -109,7 +109,7 @@ namespace Web.Pages_Specification
                     .Add(new SpecificationCastViewModel());
             }
 
-            return Partial("_Cast", this);
+            return Partial("_Casts", this);
         }
 
         public IActionResult OnPostDeleteCast()
@@ -118,7 +118,7 @@ namespace Web.Pages_Specification
                 .CastViewModels.Where(x => !x.Dead).ToList();
 
             ModelState.Clear();
-            return Partial("_Cast", this);
+            return Partial("_Casts", this);
         }
     }
 }

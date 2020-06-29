@@ -1,0 +1,31 @@
+@model Web.Pages_Specification.EditModel
+
+<table class="table borderless-top ">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].JobTitle)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].Affiliation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].ContactAddress)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.CastViewModels[0].Note)
+            </th>
+            <th>
+                <button id="add-cast-button" type="button" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="casts">
+        @await Html.PartialAsync("_Casts", Model)
+    </tbody>
+</table>

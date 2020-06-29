@@ -1,0 +1,40 @@
+@model Web.Pages_Specification.EditModel
+
+<table class="table borderless-top ">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Affiliation)
+            </th>
+            @* <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].UseSearch)
+            </th> *@
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Name)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].JobTitle)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Product)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].ContactAddress)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Note)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.SpecificationViewModel.InterviewViewModels[0].Address)
+            </th>                            
+            <th>
+                <button id="add-interview-button" type="button" class="btn btn-primary btn-sm">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="interviews">
+        @await Html.PartialAsync("_Interviews", Model)
+    </tbody>
+</table>
