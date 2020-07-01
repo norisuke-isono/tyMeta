@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ApplicationCore.Models;
+using AutoMapper;
+using Web.Interfaces;
 
 namespace Web.ViewModels
 {
-    public class SpecificationFilterViewModel
+    public class SpecificationFilterViewModel : IMapping
     {
         [Display(Name = "キーワード")]
         public string Keyword { get; set; }
@@ -37,5 +40,9 @@ namespace Web.ViewModels
 
         public int pageSize { get; set; }
 
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<SpecificationFilterViewModel, SpecificationFilter>();
+        }
     }
 }

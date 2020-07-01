@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Entites;
 using ApplicationCore.Interfaces;
+using AutoMapper;
 using Web.Interfaces;
 using Web.ViewModels;
 
@@ -10,34 +12,21 @@ namespace Web.Services
 {
     public class ScheduleViewModelService : IScheduleViewModelService
     {
+        private readonly IMapper _mapper;
         private readonly IScheduleService _scheduleService;
 
-        public ScheduleViewModelService(IScheduleService scheduleService)
+        public ScheduleViewModelService(IMapper mapper, IScheduleService scheduleService)
         {
+            _mapper = mapper;
             _scheduleService = scheduleService;
         }
 
         public async Task<List<ScheduleIndexViewModel>> GetSchedules(int tvProgramId, DateTime airDate)
         {
-            var schedules = await _scheduleService.GetSchedulesAsync(tvProgramId, airDate);
+            var schedules = await _scheduleService
+                .GetSchedulesAsync(tvProgramId, airDate);
 
-            var viewModels = schedules.Select(schedule =>
-                new ScheduleIndexViewModel
-                {
-                    Sequence = schedule.Sequence,
-                    CornerName = schedule.Corner.Name,
-                    CornerType = schedule.Corner.Type,
-                    AirDate = schedule.Broadcast.AirDate,
-                    Title = schedule.Specification.Title,
-                    Director = schedule.Specification.Director,
-                    Desk = schedule.Specification.Desk,
-                    ScheduleId = schedule.Id,
-                    BroadcastId = schedule.BroadcastId,
-                    CornerId = schedule.Corner.Id,
-                    SpecificationId = schedule.Specification.Id,
-                }).ToList();
-
-            return viewModels;
+            return _mapper.Map<IEnumerable<Schedule>, List<ScheduleIndexViewModel>>(schedules);
         }
     }
 }

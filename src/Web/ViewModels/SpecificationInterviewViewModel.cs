@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using ApplicationCore.Entites;
+using AutoMapper;
+using Web.Interfaces;
 
 namespace Web.ViewModels
 {
-    public class SpecificationInterviewViewModel
+    public class SpecificationInterviewViewModel : IMapping
     {
         [Display(Name = "名前")]
         public string Name { get; set; }
@@ -29,5 +32,10 @@ namespace Web.ViewModels
         public bool UseSearch { get; set; }
 
         public bool Dead { get; set; } = false;
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<SpecificationInterview, SpecificationInterviewViewModel>().ReverseMap();
+        }
     }
 }

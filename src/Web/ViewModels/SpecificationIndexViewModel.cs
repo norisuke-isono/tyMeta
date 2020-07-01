@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using ApplicationCore.Entites;
+using AutoMapper;
+using Web.Interfaces;
 
 namespace Web.ViewModels
 {
-    public class SpecificationIndexViewModel
+    public class SpecificationIndexViewModel : IMapping
     {
         public int SpecificationId { get; set; }
 
@@ -21,5 +22,15 @@ namespace Web.ViewModels
 
         [Display(Name = "見出し")]
         public string Title { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Specification, SpecificationIndexViewModel>()
+                .ForMember(dest => dest.SpecificationId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.AirDate, opt => opt.MapFrom(src => src.Schedule.Broadcast.AirDate))
+                .ForMember(dest => dest.TvProgramName, opt => opt.MapFrom(src => src.Schedule.Broadcast.TvProgram.Name))
+                .ForMember(dest => dest.CornerName, opt => opt.MapFrom(src => src.Schedule.Corner.Name))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title));
+        }
     }
 }

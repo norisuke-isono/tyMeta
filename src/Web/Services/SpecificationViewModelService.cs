@@ -6,6 +6,7 @@ using ApplicationCore.Entites;
 using ApplicationCore.Enums;
 using ApplicationCore.Interfaces;
 using ApplicationCore.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Interfaces;
 using Web.ViewModels;
@@ -14,17 +15,20 @@ namespace Web.Services
 {
     public class SpecificationViewModelService : ISpecificationViewModelService
     {
+        private readonly IMapper _mapper;
         private readonly ISpecificationService _specificationService;
         private readonly ICategoryService _categoryService;
         private readonly IVideoSourceService _videoSourceService;
         private readonly IArticleSourceService _articleSourceService;
 
         public SpecificationViewModelService(
+            IMapper mapper,
             ISpecificationService specificationService,
             ICategoryService categoryService,
             IVideoSourceService videoSourceService,
             IArticleSourceService articleSourceService)
         {
+            _mapper = mapper;
             _specificationService = specificationService;
             _categoryService = categoryService;
             _videoSourceService = videoSourceService;
@@ -36,179 +40,55 @@ namespace Web.Services
             var specification = await _specificationService.FindSpecificationAsync(specificationId);
             if (specification == null) return null;
 
-            var categories = await _categoryService.GetCategoriesAsync();
-            var videoSources = await _videoSourceService.GetVideoSourcesAsync();
-            var articleSources = await _articleSourceService.GetArticleSourcesAsync();
+            var viewModel = _mapper.Map<Specification, SpecificationViewModel>(specification);
 
-            var viewModel = new SpecificationViewModel
-            {
-                SpecificationId = specification.Id,
-                TvProgramName = specification.Schedule.Broadcast.TvProgram.Name,
-                CornerName = specification.Schedule.Corner.Name,
-                AirDate = specification.Schedule.Broadcast.AirDate,
-                Title = specification.Title,
-                Text = specification.Text,
-                Director = specification.Director,
-                Desk = specification.Desk,
-                Tag = specification.Tag,
-                Keyword = specification.Keyword,
-                VideoSourceNote = specification.VideoSourceNote,
-                ArticleSourceNote = specification.ArticleSourceNote,
-                DeskCheck = specification.DeskCheck,
-                UpdatedAt = specification.UpdatedAt,
-                CategorySelectItems = categories.Select(x =>
-                    new SelectListItem
-                    {
-                        Text = x.Name,
-                        Value = x.Id.ToString(),
-                        Selected = specification.SpecificationCategories
-                            .Any(sv => sv.CategoryId == x.Id)
-                    }).ToList(),
-                VideoSourceSelectItems = videoSources.Select(x =>
-                    new SelectListItem
-                    {
-                        Text = x.Name,
-                        Value = x.Id.ToString(),
-                        Selected = specification.SpecificationVideoSources
-                            .Any(sv => sv.VideoSourceId == x.Id)
-                    }).ToList(),
-                ArticleSourceSelectItems = articleSources.Select(x =>
-                    new SelectListItem
-                    {
-                        Text = x.Name,
-                        Value = x.Id.ToString(),
-                        Selected = specification.SpecificationArticleSources
-                            .Any(sa => sa.ArticleSourceId == x.Id)
-                    }).ToList(),
-                MaterialSourceViewModels = specification.SpecificationMaterialSources
-                    .Select(x => new SpecificationMaterialSourceViewModel
-                    {
-                        Type = x.Type,
-                        CopyrightHolder = x.CopyrightHolder,
-                        ConditionsOfUse = x.ConditionsOfUse,
-                        Note = x.Note,
-                        Dead = false
-                    }).ToList(),
-                InterviewViewModels = specification.SpecificationInterviews
-                    .Select(x => new SpecificationInterviewViewModel
-                    {
-                        Name = x.Name,
-                        Affiliation = x.Affiliation,
-                        JobTitle = x.JobTitle,
-                        Product = x.Product,
-                        ContactAddress = x.ContactAddress,
-                        Note = x.Note,
-                        Address = x.Address,
-                        UseSearch = x.UseSearch,
-                        Dead = false
-                    }).ToList(),
-                CastViewModels = specification.SpecificationCasts
-                    .Select(x => new SpecificationCastViewModel
-                    {
-                        Name = x.Name,
-                        Affiliation = x.Affiliation,
-                        JobTitle = x.JobTitle,
-                        ContactAddress = x.ContactAddress,
-                        Note = x.Note,
-                        Dead = false
-                    }).ToList()
-            };
+            var categories = await _categoryService.GetCategoriesAsync();
+            viewModel.CategorySelectItems = categories.Select(x =>
+                new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = specification.SpecificationCategories
+                        .Any(sv => sv.CategoryId == x.Id)
+                }).ToList();
+
+            var videoSources = await _videoSourceService.GetVideoSourcesAsync();
+            viewModel.VideoSourceSelectItems = videoSources.Select(x =>
+                new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = specification.SpecificationVideoSources
+                        .Any(sv => sv.VideoSourceId == x.Id)
+                }).ToList();
+
+            var articleSources = await _articleSourceService.GetArticleSourcesAsync();
+            viewModel.ArticleSourceSelectItems = articleSources.Select(x =>
+                new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected = specification.SpecificationArticleSources
+                    .Any(sa => sa.ArticleSourceId == x.Id)
+                }).ToList();
 
             return viewModel;
         }
 
         public async Task<List<SpecificationIndexViewModel>> SearchSpecifications(SpecificationFilterViewModel filterViewModel)
         {
-            var specifications = await _specificationService
-                .SearchSpecificationsAsync(new SpecificationFilter
-                {
-                    Keyword = filterViewModel.Keyword,
-                    TvProgramId = filterViewModel.TvProgramId,
-                    CornerId = filterViewModel.CornerId,
-                    VideoSourceId = filterViewModel.VideoSourceId,
-                    ArticleSourceId = filterViewModel.ArticleSourceId,
-                    Director = filterViewModel.Director,
-                    Desk = filterViewModel.Desk,
-                    AirDateFrom = filterViewModel.AirDateFrom,
-                    AirDateTo = filterViewModel.AirDateTo,
-                    pageIndex = 1, // TODO:
-                    pageSize = 20, // TODO:
-                });
+            var filter = _mapper.Map<SpecificationFilterViewModel, SpecificationFilter>(filterViewModel);
+            filter.pageIndex = 1; // TODO:
+            filter.pageSize = 20; // TODO:
 
-            var indexViewModels = specifications.Select(x => new SpecificationIndexViewModel
-            {
-                SpecificationId = x.Id,
-                AirDate = x.Schedule.Broadcast.AirDate,
-                TvProgramName = x.Schedule.Broadcast.TvProgram.Name,
-                CornerName = x.Schedule.Corner.Name,
-                Title = x.Title,
-            }).ToList();
+            var specifications = await _specificationService.SearchSpecificationsAsync(filter);
 
-            return indexViewModels;
+            return _mapper.Map<IEnumerable<Specification>, List<SpecificationIndexViewModel>>(specifications);
         }
 
         public async Task UpdateSpecificationFrom(SpecificationViewModel viewModel)
         {
-            var specification = new Specification
-            {
-                Id = viewModel.SpecificationId,
-                Title = viewModel.Title,
-                Text = viewModel.Text,
-                Director = viewModel.Director,
-                Desk = viewModel.Desk,
-                Tag = viewModel.Tag,
-                Keyword = viewModel.Keyword,
-                VideoSourceNote = viewModel.VideoSourceNote,
-                ArticleSourceNote = viewModel.ArticleSourceNote,
-                DeskCheck = viewModel.DeskCheck,
-                SpecificationCategories = viewModel.CategorySelectItems
-                    .Where(x => x.Selected)
-                    .Select(x => new SpecificationCategory
-                    {
-                        CategoryId = int.Parse(x.Value),
-                    }).ToList(),
-                SpecificationVideoSources = viewModel.VideoSourceSelectItems
-                    .Where(x => x.Selected)
-                    .Select(x => new SpecificationVideoSource
-                    {
-                        VideoSourceId = int.Parse(x.Value),
-                    }).ToList(),
-                SpecificationArticleSources = viewModel.ArticleSourceSelectItems
-                    .Where(x => x.Selected)
-                    .Select(x => new SpecificationArticleSource
-                    {
-                        ArticleSourceId = int.Parse(x.Value),
-                    }).ToList(),
-                SpecificationMaterialSources = viewModel.MaterialSourceViewModels
-                    ?.Select(x => new SpecificationMaterialSource
-                    {
-                        Type = (MaterialType)x.Type,
-                        CopyrightHolder = x.CopyrightHolder,
-                        ConditionsOfUse = x.ConditionsOfUse,
-                        Note = x.Note
-                    })?.ToList(),
-                SpecificationInterviews = viewModel.InterviewViewModels
-                    ?.Select(x => new SpecificationInterview
-                    {
-                        Name = x.Name,
-                        Affiliation = x.Affiliation,
-                        JobTitle = x.JobTitle,
-                        Product = x.Product,
-                        ContactAddress = x.ContactAddress,
-                        Note = x.Note,
-                        Address = x.Address,
-                        UseSearch = x.UseSearch,
-                    })?.ToList(),
-                SpecificationCasts = viewModel.CastViewModels
-                    ?.Select(x => new SpecificationCast
-                    {
-                        Name = x.Name,
-                        Affiliation = x.Affiliation,
-                        JobTitle = x.JobTitle,
-                        ContactAddress = x.ContactAddress,
-                        Note = x.Note,
-                    })?.ToList()
-            };
+            var specification = _mapper.Map<SpecificationViewModel, Specification>(viewModel);
 
             await _specificationService.UpdateSpecificationAsync(specification);
         }

@@ -1,11 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using ApplicationCore.Entites;
+using ApplicationCore.Enums;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Web.Interfaces;
 
 namespace Web.ViewModels
 {
-    public class SpecificationViewModel
+    public class SpecificationViewModel : IMapping
     {
         public int SpecificationId { get; set; }
 
@@ -66,5 +71,60 @@ namespace Web.ViewModels
 
         [Display(Name = "出演者")]
         public List<SpecificationCastViewModel> CastViewModels { get; set; }
+
+        public List<SpecificationCategory> SpecificationCategories
+        {
+            get
+            {
+                if (CategorySelectItems == null) return null;
+
+                return CategorySelectItems.Where(x => x.Selected)
+                    .Select(x => new SpecificationCategory
+                    {
+                        CategoryId = int.Parse(x.Value),
+                    }).ToList();
+            }
+        }
+
+        public List<SpecificationVideoSource> SpecificationVideoSources
+        {
+            get
+            {
+                if (VideoSourceSelectItems == null) return null;
+
+                return VideoSourceSelectItems.Where(x => x.Selected)
+                    .Select(x => new SpecificationVideoSource
+                    {
+                        VideoSourceId = int.Parse(x.Value),
+                    }).ToList();
+            }
+        }
+
+        public List<SpecificationArticleSource> SpecificationArticleSources
+        {
+            get
+            {
+                if (ArticleSourceSelectItems == null) return null;
+
+                return ArticleSourceSelectItems.Where(x => x.Selected)
+                    .Select(x => new SpecificationArticleSource
+                    {
+                        ArticleSourceId = int.Parse(x.Value),
+                    }).ToList();
+            }
+        }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Specification, SpecificationViewModel>()
+                .ForMember(dest => dest.SpecificationId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.TvProgramName, opt => opt.MapFrom(src => src.Schedule.Broadcast.TvProgram.Name))
+                .ForMember(dest => dest.CornerName, opt => opt.MapFrom(src => src.Schedule.Corner.Name))
+                .ForMember(dest => dest.AirDate, opt => opt.MapFrom(src => src.Schedule.Broadcast.AirDate))
+                .ForMember(dest => dest.MaterialSourceViewModels, opt => opt.MapFrom(src => src.SpecificationMaterialSources))
+                .ForMember(dest => dest.InterviewViewModels, opt => opt.MapFrom(src => src.SpecificationInterviews))
+                .ForMember(dest => dest.CastViewModels, opt => opt.MapFrom(src => src.SpecificationCasts))
+                .ReverseMap();
+        }
     }
 }
