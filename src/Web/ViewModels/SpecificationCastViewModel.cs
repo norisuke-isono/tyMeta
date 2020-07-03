@@ -26,7 +26,9 @@ namespace Web.ViewModels
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<SpecificationCast, SpecificationCastViewModel>().ReverseMap();
+            profile.CreateMap<SpecificationCast, SpecificationCastViewModel>()
+                .ForMember(dest => dest.Dead, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

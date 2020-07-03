@@ -1,7 +1,7 @@
 using AutoMapper;
 using Xunit;
 
-namespace UnitTests.Mappings
+namespace UnitTests.Web.Mappings
 {
     public class MappingTests : IClassFixture<MappingTestsFixture>
     {

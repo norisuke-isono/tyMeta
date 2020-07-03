@@ -1,7 +1,7 @@
 using AutoMapper;
 using Web.Mappings;
 
-namespace UnitTests.Mappings
+namespace UnitTests.Web.Mappings
 {
     public class MappingTestsFixture
     {

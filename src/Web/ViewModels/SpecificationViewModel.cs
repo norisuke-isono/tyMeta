@@ -124,6 +124,9 @@ namespace Web.ViewModels
                 .ForMember(dest => dest.MaterialSourceViewModels, opt => opt.MapFrom(src => src.SpecificationMaterialSources))
                 .ForMember(dest => dest.InterviewViewModels, opt => opt.MapFrom(src => src.SpecificationInterviews))
                 .ForMember(dest => dest.CastViewModels, opt => opt.MapFrom(src => src.SpecificationCasts))
+                .ForMember(dest => dest.CategorySelectItems, opt => opt.Ignore())
+                .ForMember(dest => dest.VideoSourceSelectItems, opt => opt.Ignore())
+                .ForMember(dest => dest.ArticleSourceSelectItems, opt => opt.Ignore())
                 .ReverseMap();
         }
     }

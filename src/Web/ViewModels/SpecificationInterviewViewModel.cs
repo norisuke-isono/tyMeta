@@ -35,7 +35,9 @@ namespace Web.ViewModels
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<SpecificationInterview, SpecificationInterviewViewModel>().ReverseMap();
+            profile.CreateMap<SpecificationInterview, SpecificationInterviewViewModel>()
+                .ForMember(dest => dest.Dead, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

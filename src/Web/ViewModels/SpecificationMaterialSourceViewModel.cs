@@ -25,7 +25,9 @@ namespace Web.ViewModels
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<SpecificationMaterialSource, SpecificationMaterialSourceViewModel>().ReverseMap();
+            profile.CreateMap<SpecificationMaterialSource, SpecificationMaterialSourceViewModel>()
+                .ForMember(dest => dest.Dead, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }
