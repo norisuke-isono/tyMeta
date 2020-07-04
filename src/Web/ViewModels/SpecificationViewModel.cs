@@ -14,6 +14,8 @@ namespace Web.ViewModels
     {
         public int SpecificationId { get; set; }
 
+        public int TvProgramId { get; set; }
+
         [Display(Name = "番組名")]
         public string TvProgramName { get; set; }
 
@@ -118,6 +120,7 @@ namespace Web.ViewModels
         {
             profile.CreateMap<Specification, SpecificationViewModel>()
                 .ForMember(dest => dest.SpecificationId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.TvProgramId, opt => opt.MapFrom(src => src.Schedule.Broadcast.TvProgram.Id))
                 .ForMember(dest => dest.TvProgramName, opt => opt.MapFrom(src => src.Schedule.Broadcast.TvProgram.Name))
                 .ForMember(dest => dest.CornerName, opt => opt.MapFrom(src => src.Schedule.Corner.Name))
                 .ForMember(dest => dest.AirDate, opt => opt.MapFrom(src => src.Schedule.Broadcast.AirDate))
