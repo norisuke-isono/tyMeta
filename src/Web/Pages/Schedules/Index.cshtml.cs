@@ -30,9 +30,10 @@ namespace Web.Pages_Schedules
             _scheduleViewModelService = scheduleViewModelService;
         }
 
-        [BindProperty]
-        public int TvProgramId { get; set; }
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
+        public int? TvProgramId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public DateTime AirDate { get; set; } = DateTime.Now;
 
         public SelectList TvPrograms { get; set; }
@@ -43,29 +44,25 @@ namespace Web.Pages_Schedules
         {
             TvPrograms = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
                                         nameof(TvProgram.Id), nameof(TvProgram.Name));
-        }
 
-        public async Task OnPostSearchAsync()
-        {
-            TvPrograms = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
-                                        nameof(TvProgram.Id), nameof(TvProgram.Name));
+            if (TvProgramId == null) return;
 
             var broadcast = await _broadcastService
-                .FindBroadcastAsync(TvProgramId, AirDate);
+                .FindBroadcastAsync((int)TvProgramId, AirDate);
             if (broadcast == null)
             {
                 await _broadcastService
-                    .CreateBroadcastWithDefaultSchedules(TvProgramId, AirDate);
+                    .CreateBroadcastWithDefaultSchedules((int)TvProgramId, AirDate);
             }
 
             Schedules = await _scheduleViewModelService
-                .GetSchedules(TvProgramId, AirDate);
+                .GetSchedules((int)TvProgramId, AirDate);
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()
         {
             await _broadcastService
-                .DeleteBroadcast(TvProgramId, AirDate);
+                .DeleteBroadcast((int)TvProgramId, AirDate);
 
             return RedirectToPage("./Index");
         }
