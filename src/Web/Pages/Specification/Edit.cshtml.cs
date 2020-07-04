@@ -43,7 +43,13 @@ namespace Web.Pages_Specification
             await _specificationViewModelService
                 .UpdateSpecificationFrom(SpecificationViewModel);
 
-            return RedirectToPage("/Schedules/Index");
+            return RedirectToPage(
+                "/Schedules/Index",
+                new
+                {
+                    AirDate = SpecificationViewModel.AirDate.ToString("yyyy-MM-dd"),
+                    TvProgramId = SpecificationViewModel.TvProgramId
+                });
         }
 
         public IActionResult OnPostAddMaterial()

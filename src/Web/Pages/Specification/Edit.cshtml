@@ -3,13 +3,19 @@
 
 @{
     ViewData["Title"] = "明細入力";
+
+    var schedulesIndexPageParams = new Dictionary<string, string>
+        {
+            { "AirDate", Model.SpecificationViewModel.AirDate.ToString("yyyy-MM-dd") },
+            { "TvProgramId", Model.SpecificationViewModel.TvProgramId.ToString() }
+        };
 }
 
 <h4>明細入力</h4>
 <hr />
 
 <div class="d-flex flex-row">
-    <a asp-page="/Schedules/Index" class="text-dark">
+    <a asp-page="/Schedules/Index" asp-all-route-data="schedulesIndexPageParams" class="text-dark">
         <h5>@Model.SpecificationViewModel.AirDate.ToString("yyyy/MM/dd") 放送　@Model.SpecificationViewModel.TvProgramName</h5>
     </a>
     @* <p class="ml-auto text-secondary font-weight-light">最終更新日時: @Model.SpecificationViewModel.UpdatedAt.ToString("yyyy/MM/dd hh:mm:ss")</p> *@
@@ -63,6 +69,8 @@
         </div>
     </div>
 
+    <input type="hidden" asp-for="SpecificationViewModel.AirDate" />
+    <input type="hidden" asp-for="SpecificationViewModel.TvProgramId" />
     <input type="hidden" asp-for="SpecificationViewModel.SpecificationId" />
 </form>
 
