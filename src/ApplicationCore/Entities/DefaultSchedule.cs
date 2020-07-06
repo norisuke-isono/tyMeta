@@ -4,7 +4,7 @@ using ApplicationCore.Interfaces;
 
 namespace ApplicationCore.Entites
 {
-    public class BaseSchedule : BaseEntity, ISchedule
+    public class DefaultSchedule : BaseEntity, ISchedule
     {
         [Required]
         public int Sequence { get; set; }

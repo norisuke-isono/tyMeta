@@ -13,6 +13,6 @@ namespace ApplicationCore.Entites
 
         public List<Broadcast> Broadcasts { get; set; }
 
-        public List<BaseSchedule> BaseSchedules { get; set; }
+        public List<DefaultSchedule> DefaultSchedules { get; set; }
     }
 }

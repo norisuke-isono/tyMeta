@@ -26,7 +26,7 @@ namespace ApplicationCore.Services
 
         public async Task CreateBroadcastWithDefaultSchedules(int tvProgramId, DateTime airDate)
         {
-            var baseSchedules = await _context.BaseSchedules
+            var defaultSchedules = await _context.DefaultSchedules
                 .Where(x => x.TvProgramId == tvProgramId)
                 .AsNoTracking().ToListAsync();
 
@@ -34,7 +34,7 @@ namespace ApplicationCore.Services
             {
                 AirDate = airDate,
                 TvProgramId = tvProgramId,
-                Schedules = baseSchedules.Select(x =>
+                Schedules = defaultSchedules.Select(x =>
                     new Schedule
                     {
                         Sequence = x.Sequence,

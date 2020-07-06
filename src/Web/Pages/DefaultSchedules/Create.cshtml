@@ -1,0 +1,62 @@
+@page
+@model Web.Pages.Schedules.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>DefaultSchedule</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.Sequence" class="control-label"></label>
+                <input asp-for="DefaultSchedule.Sequence" class="form-control" />
+                <span asp-validation-for="DefaultSchedule.Sequence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.TvProgramId" class="control-label"></label>
+                <select asp-for="DefaultSchedule.TvProgramId" class ="form-control" asp-items="ViewBag.TvProgramId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.CornerId" class="control-label"></label>
+                <select asp-for="DefaultSchedule.CornerId" class ="form-control" asp-items="ViewBag.CornerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.CreateUserId" class="control-label"></label>
+                <input asp-for="DefaultSchedule.CreateUserId" class="form-control" />
+                <span asp-validation-for="DefaultSchedule.CreateUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.UpdateUserId" class="control-label"></label>
+                <input asp-for="DefaultSchedule.UpdateUserId" class="form-control" />
+                <span asp-validation-for="DefaultSchedule.UpdateUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.CreatedAt" class="control-label"></label>
+                <input asp-for="DefaultSchedule.CreatedAt" class="form-control" />
+                <span asp-validation-for="DefaultSchedule.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DefaultSchedule.UpdatedAt" class="control-label"></label>
+                <input asp-for="DefaultSchedule.UpdatedAt" class="form-control" />
+                <span asp-validation-for="DefaultSchedule.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

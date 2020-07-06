@@ -10,7 +10,7 @@ namespace ApplicationCore.Interfaces
         DbSet<TvProgram> TvPrograms { get; set; }
         DbSet<Corner> Corners { get; set; }
         DbSet<Broadcast> Broadcasts { get; set; }
-        DbSet<BaseSchedule> BaseSchedules { get; set; }
+        DbSet<DefaultSchedule> DefaultSchedules { get; set; }
         DbSet<Schedule> Schedules { get; set; }
         DbSet<Specification> Specifications { get; set; }
         DbSet<Category> Categories { get; set; }

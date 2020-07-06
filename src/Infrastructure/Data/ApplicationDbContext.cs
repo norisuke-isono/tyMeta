@@ -17,7 +17,7 @@ namespace Infrastructure.Data
         public DbSet<TvProgram> TvPrograms { get; set; }
         public DbSet<Corner> Corners { get; set; }
         public DbSet<Broadcast> Broadcasts { get; set; }
-        public DbSet<BaseSchedule> BaseSchedules { get; set; }
+        public DbSet<DefaultSchedule> DefaultSchedules { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -32,7 +32,7 @@ namespace Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BaseSchedule>()
+            modelBuilder.Entity<DefaultSchedule>()
                 .HasIndex(x => new { x.TvProgramId, x.Sequence }).IsUnique();
 
             // NOTE: EFcore3.1では多対多で中間テーブル用のEntityを手動で定義する必要がある。
