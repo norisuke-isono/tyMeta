@@ -80,53 +80,7 @@ namespace ApplicationCore.Services
                 .Include(spec => spec.Schedule)
                     .ThenInclude(Schedule => Schedule.Corner);
 
-            if (filter.TvProgramId != null)
-            {
-                source = source.Where(spec => spec.Schedule.Broadcast.TvProgramId == filter.TvProgramId);
-            }
-
-            if (filter.AirDateFrom != null || filter.AirDateTo != null)
-            {
-                source = source.Where(spec => filter.AirDateFrom <= spec.Schedule.Broadcast.AirDate
-                                && spec.Schedule.Broadcast.AirDate <= filter.AirDateTo);
-            }
-
-            if (filter.CornerId != null)
-            {
-                source = source.Where(spec => spec.Schedule.CornerId == filter.CornerId);
-            }
-
-            if (!string.IsNullOrEmpty(filter.Keyword))
-            {
-                source = source.Where(spec => spec.Title.Contains(filter.Keyword)
-                                           || spec.Text.Contains(filter.Keyword));
-            }
-
-            if (!string.IsNullOrEmpty(filter.Director))
-            {
-                source = source.Where(spec => spec.Director.Contains(filter.Director));
-            }
-
-            if (!string.IsNullOrEmpty(filter.Desk))
-            {
-                source = source.Where(spec => spec.Desk.Contains(filter.Desk));
-            }
-
-            if (filter.ArticleSourceId != null)
-            {
-                source = source.Include(spec => spec.SpecificationArticleSources)
-                    .Where(spec => spec.SpecificationArticleSources
-                        .Any(sa => sa.ArticleSourceId == filter.ArticleSourceId));
-            }
-
-            if (filter.VideoSourceId != null)
-            {
-                source = source.Include(spec => spec.SpecificationVideoSources)
-                    .Where(spec => spec.SpecificationVideoSources
-                        .Any(sa => sa.VideoSourceId == filter.VideoSourceId));
-            }
-
-            var specs = await source
+            var specs = await FilerSpecifications(source, filter)
                 .OrderBy(spec => spec.Schedule.Broadcast.AirDate)
                 .ThenBy(spec => spec.Schedule.Broadcast.TvProgramId)
                 .ThenBy(spec => spec.Schedule.Sequence)
@@ -136,5 +90,66 @@ namespace ApplicationCore.Services
 
             return specs;
         }
+
+        public async Task<int> CountSpecificationsAsync(SpecificationFilter filter)
+        {
+            IQueryable<Specification> source = _context.Specifications
+                .Include(spec => spec.Schedule)
+                    .ThenInclude(schedule => schedule.Broadcast);
+
+            return await FilerSpecifications(source, filter).CountAsync();
+        }
+
+        private IQueryable<Specification> FilerSpecifications(IQueryable<Specification> query, SpecificationFilter filter)
+        {
+            if (filter.TvProgramId != null)
+            {
+                query = query.Where(spec => spec.Schedule.Broadcast.TvProgramId == filter.TvProgramId);
+            }
+
+            if (filter.AirDateFrom != null || filter.AirDateTo != null)
+            {
+                query = query.Where(spec => filter.AirDateFrom <= spec.Schedule.Broadcast.AirDate
+                                && spec.Schedule.Broadcast.AirDate <= filter.AirDateTo);
+            }
+
+            if (filter.CornerId != null)
+            {
+                query = query.Where(spec => spec.Schedule.CornerId == filter.CornerId);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Keyword))
+            {
+                query = query.Where(spec => spec.Title.Contains(filter.Keyword)
+                                           || spec.Text.Contains(filter.Keyword));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Director))
+            {
+                query = query.Where(spec => spec.Director.Contains(filter.Director));
+            }
+
+            if (!string.IsNullOrEmpty(filter.Desk))
+            {
+                query = query.Where(spec => spec.Desk.Contains(filter.Desk));
+            }
+
+            if (filter.ArticleSourceId != null)
+            {
+                query = query.Include(spec => spec.SpecificationArticleSources)
+                    .Where(spec => spec.SpecificationArticleSources
+                        .Any(sa => sa.ArticleSourceId == filter.ArticleSourceId));
+            }
+
+            if (filter.VideoSourceId != null)
+            {
+                query = query.Include(spec => spec.SpecificationVideoSources)
+                    .Where(spec => spec.SpecificationVideoSources
+                        .Any(sa => sa.VideoSourceId == filter.VideoSourceId));
+            }
+
+            return query;
+        }
+
     }
 }

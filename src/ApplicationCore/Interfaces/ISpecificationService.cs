@@ -13,5 +13,7 @@ namespace ApplicationCore.Interfaces
         Task UpdateSpecificationAsync(Specification specification);
 
         Task<List<Specification>> SearchSpecificationsAsync(SpecificationFilter filter);
+
+        Task<int> CountSpecificationsAsync(SpecificationFilter filter);
     }
 }
