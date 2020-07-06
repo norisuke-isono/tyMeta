@@ -1,0 +1,27 @@
+@model Web.ViewModels.PaginationViewModel
+
+@{
+    var disabledPrevious = Model.HasPrevious ? "" : "disabled";
+    var disabledNext = Model.HasNext ? "" : "disabled";
+}
+
+<nav>
+    <ul class="pagination justify-content-end">
+        <li class="page-item @disabledPrevious">
+            <a class="page-link" data-target="@(Model.PageIndex-1)">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for(var i=Model.StartIndex; i<=Model.EndIndex; i++){
+            var active = (i == Model.PageIndex) ? "active" : "";
+            <li class="page-item @active">
+                <a class="page-link" data-target="@i">@i</a>
+            </li>
+        }
+        <li class="page-item @disabledNext">
+            <a class="page-link" data-target="@(Model.PageIndex+1)">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
