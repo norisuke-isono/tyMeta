@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ApplicationCore.Entites;
 using AutoMapper;
@@ -6,7 +7,13 @@ using Web.Interfaces;
 
 namespace Web.ViewModels
 {
-    public class SpecificationIndexViewModel : IMapping
+    public class SpecificationIndexViewModel
+    {
+        public IList<SpecificationIndexItemViewModel> Items { get; set; }
+        public PaginationViewModel PaginationViewModel { get; set; }
+    }
+
+    public class SpecificationIndexItemViewModel : IMapping
     {
         public int SpecificationId { get; set; }
 
@@ -25,7 +32,7 @@ namespace Web.ViewModels
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Specification, SpecificationIndexViewModel>()
+            profile.CreateMap<Specification, SpecificationIndexItemViewModel>()
                 .ForMember(dest => dest.SpecificationId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.AirDate, opt => opt.MapFrom(src => src.Schedule.Broadcast.AirDate))
                 .ForMember(dest => dest.TvProgramName, opt => opt.MapFrom(src => src.Schedule.Broadcast.TvProgram.Name))

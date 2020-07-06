@@ -40,8 +40,7 @@ namespace Web.Pages_Specification
         public SelectList VideoSources { get; set; }
         public SelectList ArticleSources { get; set; }
 
-        public IList<SpecificationIndexViewModel> Specifications { get; set; }
-             = Enumerable.Empty<SpecificationIndexViewModel>().ToList();
+        public SpecificationIndexViewModel SpecificationIndexViewModel { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -57,7 +56,7 @@ namespace Web.Pages_Specification
             Corners = new SelectList(await _cornerService.GetCornersAsync(),
                                         nameof(Corner.Id), nameof(Corner.Name));
 
-            Specifications = await _specificationViewModelService.SearchSpecifications(Filter);
+            SpecificationIndexViewModel = await _specificationViewModelService.SearchSpecifications(Filter);
         }
     }
 }

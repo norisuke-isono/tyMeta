@@ -75,15 +75,25 @@ namespace Web.Services
             return viewModel;
         }
 
-        public async Task<List<SpecificationIndexViewModel>> SearchSpecifications(SpecificationFilterViewModel filterViewModel)
+        public async Task<SpecificationIndexViewModel> SearchSpecifications(SpecificationFilterViewModel filterViewModel)
         {
             var filter = _mapper.Map<SpecificationFilterViewModel, SpecificationFilter>(filterViewModel);
-            filter.pageIndex = 1; // TODO:
-            filter.pageSize = 20; // TODO:
 
             var specifications = await _specificationService.SearchSpecificationsAsync(filter);
+            var totalItems = await _specificationService.CountSpecificationsAsync(filter);
+            var totalPages = int.Parse(Math.Ceiling(((decimal)totalItems / filter.pageSize)).ToString());
 
-            return _mapper.Map<IEnumerable<Specification>, List<SpecificationIndexViewModel>>(specifications);
+            return new SpecificationIndexViewModel()
+            {
+                Items = _mapper.Map<IEnumerable<Specification>, List<SpecificationIndexItemViewModel>>(specifications),
+                PaginationViewModel = new PaginationViewModel()
+                {
+                    TotalItems = totalItems,
+                    PageSize = filter.pageSize,
+                    PageIndex = filter.pageIndex,
+                    TotalPages = totalPages,
+                }
+            };
         }
 
         public async Task UpdateSpecificationFrom(SpecificationViewModel viewModel)

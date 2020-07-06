@@ -36,9 +36,9 @@ namespace Web.ViewModels
         [Display(Name = "放送日")]
         public DateTime AirDateTo { get; set; } = DateTime.Now;
 
-        public int pageIndex { get; set; }
+        public int PageIndex { get; set; } = 1;
 
-        public int pageSize { get; set; }
+        public int PageSize { get; set; } = 20;
 
         public void Mapping(Profile profile)
         {
