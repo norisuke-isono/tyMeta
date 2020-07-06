@@ -9,6 +9,8 @@ namespace ApplicationCore.Entites
         [Required]
         public int Sequence { get; set; }
 
+        public bool DisplayFlag { get; set; }
+
         [Required]
         public int TvProgramId { get; set; }
         public TvProgram TvProgram { get; set; }
