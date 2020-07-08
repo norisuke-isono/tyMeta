@@ -30,9 +30,9 @@ namespace Web.Pages_TvPrograms
         [BindProperty(SupportsGet = true)]
         public int? TvProgramId { get; set; }
 
-        public SelectList TvPrograms { get; set; }
+        public SelectList TvProgramSelectList { get; set; }
 
-        public SelectList Corners { get; set; }
+        public SelectList CornerSelectList { get; set; }
 
         [BindProperty]
         public List<DefaultScheduleViewModel> DefaultScheduleViewModels { get; set; }
@@ -40,10 +40,10 @@ namespace Web.Pages_TvPrograms
 
         private async Task SetSelectListAsync()
         {
-            TvPrograms = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
+            TvProgramSelectList = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
                                         nameof(TvProgram.Id), nameof(TvProgram.Name));
 
-            Corners = new SelectList((await _cornerService.GetCornersAsync()).Where(x => x.TvProgramId == TvProgramId),
+            CornerSelectList = new SelectList((await _cornerService.GetCornersAsync()).Where(x => x.TvProgramId == TvProgramId),
                                     nameof(Corner.Id), nameof(Corner.Name));
         }
 

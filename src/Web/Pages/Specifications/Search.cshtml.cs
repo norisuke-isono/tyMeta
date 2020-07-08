@@ -35,25 +35,25 @@ namespace Web.Pages_Specifications
         [BindProperty(SupportsGet = true)]
         public SpecificationFilterViewModel Filter { get; set; }
 
-        public SelectList TvPrograms { get; set; }
-        public SelectList Corners { get; set; }
-        public SelectList VideoSources { get; set; }
-        public SelectList ArticleSources { get; set; }
+        public SelectList TvProgramSelectList { get; set; }
+        public SelectList CornerSelectList { get; set; }
+        public SelectList VideoSourceSelectList { get; set; }
+        public SelectList ArticleSourceSelectList { get; set; }
 
         public SpecificationIndexViewModel SpecificationIndexViewModel { get; set; }
 
         public async Task OnGetAsync()
         {
-            TvPrograms = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
+            TvProgramSelectList = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
                                         nameof(TvProgram.Id), nameof(TvProgram.Name));
 
-            VideoSources = new SelectList(await _videoSourceService.GetVideoSourcesAsync(),
+            VideoSourceSelectList = new SelectList(await _videoSourceService.GetVideoSourcesAsync(),
                                         nameof(VideoSource.Id), nameof(VideoSource.Name));
 
-            ArticleSources = new SelectList(await _articleSourceService.GetArticleSourcesAsync(),
+            ArticleSourceSelectList = new SelectList(await _articleSourceService.GetArticleSourcesAsync(),
                                         nameof(ArticleSource.Id), nameof(ArticleSource.Name));
 
-            Corners = new SelectList(await _cornerService.GetCornersAsync(),
+            CornerSelectList = new SelectList(await _cornerService.GetCornersAsync(),
                                         nameof(Corner.Id), nameof(Corner.Name));
 
             SpecificationIndexViewModel = await _specificationViewModelService.SearchSpecifications(Filter);

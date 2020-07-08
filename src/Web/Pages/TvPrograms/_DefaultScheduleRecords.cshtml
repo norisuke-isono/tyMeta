@@ -8,7 +8,7 @@
         </td>
         <td>
             @Html.DropDownListFor(model => model.DefaultScheduleViewModels[i].CornerId, 
-                                            Model.Corners,  "未選択", new { @class="form-control" })
+                                            Model.CornerSelectList,  "未選択", new { @class="form-control" })
         </td>
         <td>
             @Html.EditorFor(model => model.DefaultScheduleViewModels[i].DisplayFlag)

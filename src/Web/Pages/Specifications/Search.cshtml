@@ -20,14 +20,14 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label asp-for="Filter.TvProgramId" ></label>
-                <select asp-for="Filter.TvProgramId" class="form-control" asp-items="Model.TvPrograms">
+                <select asp-for="Filter.TvProgramId" class="form-control" asp-items="Model.TvProgramSelectList">
                     <option value="">すべて</option>
                 </select>
                 <span asp-validation-for="Filter.TvProgramId" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
                 <label asp-for="Filter.CornerId" ></label>
-                <select asp-for="Filter.CornerId" class="form-control" asp-items="Model.Corners">
+                <select asp-for="Filter.CornerId" class="form-control" asp-items="Model.CornerSelectList">
                     <option value="">すべて</option>
                 </select>
                 <span asp-validation-for="Filter.CornerId" class="text-danger"></span>
@@ -47,14 +47,14 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label asp-for="Filter.VideoSourceId" ></label>
-                <select asp-for="Filter.VideoSourceId" class="form-control" asp-items="Model.VideoSources">
+                <select asp-for="Filter.VideoSourceId" class="form-control" asp-items="Model.VideoSourceSelectList">
                     <option value="">すべて</option>
                 </select>
                 <span asp-validation-for="Filter.VideoSourceId" class="text-danger"></span>
             </div>
             <div class="form-group col-md-3">
                 <label asp-for="Filter.ArticleSourceId" ></label>
-                <select asp-for="Filter.ArticleSourceId" class="form-control" asp-items="Model.ArticleSources">
+                <select asp-for="Filter.ArticleSourceId" class="form-control" asp-items="Model.ArticleSourceSelectList">
                     <option value="">すべて</option>
                 </select>
                 <span asp-validation-for="Filter.ArticleSourceId" class="text-danger"></span>

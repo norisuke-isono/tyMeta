@@ -33,13 +33,13 @@ namespace Web.Pages_Broadcasts
         [BindProperty(SupportsGet = true)]
         public DateTime AirDate { get; set; } = DateTime.Now;
 
-        public SelectList TvPrograms { get; set; }
+        public SelectList TvProgramSelectList { get; set; }
         public IList<ScheduleViewModel> ScheduleViewModels { get; set; }
             = Enumerable.Empty<ScheduleViewModel>().ToList();
 
         public async Task OnGetAsync()
         {
-            TvPrograms = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
+            TvProgramSelectList = new SelectList(await _tvProgramService.GetTvProgramsAsync(),
                                         nameof(TvProgram.Id), nameof(TvProgram.Name));
 
             if (TvProgramId == null) return;
