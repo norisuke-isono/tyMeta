@@ -51,6 +51,7 @@ namespace Web
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
             services.AddScoped<ISpecificationViewModelService, SpecificationViewModelService>();
             services.AddScoped<ITvProgramViewModelService, TvProgramViewModelService>();
+            services.AddScoped<IBroadcastViewModelService, BroadcastViewModelService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorPagesOptions(options =>
