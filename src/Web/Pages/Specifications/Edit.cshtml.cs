@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Web.Pages_Specification
+namespace Web.Pages_Specifications
 {
     public class EditModel : PageModel
     {

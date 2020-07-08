@@ -1,5 +1,5 @@
 @page
-@model Web.Pages_Specification.SearchModel
+@model Web.Pages_Specifications.SearchModel
 
 @{
     ViewData["Title"] = "明細検索";
@@ -118,7 +118,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>         
             <td>
-                <a asp-page="/Specification/Edit" asp-route-id="@item.SpecificationId">明細</a>
+                <a asp-page="/Specifications/Edit" asp-route-id="@item.SpecificationId">明細</a>
             </td>
         </tr>
     }

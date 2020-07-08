@@ -1,5 +1,5 @@
 @page "{handler?}"
-@model Web.Pages_Specification.EditModel
+@model Web.Pages_Specifications.EditModel
 
 @{
     ViewData["Title"] = "明細入力";
@@ -77,30 +77,30 @@
 @section Scripts{
     <script>
         $('#add-material-button').on('click', function(){
-            updateDom('#materials','/Specification/Edit/AddMaterial');
+            updateDom('#materials','/Specifications/Edit/AddMaterial');
         });
 
         $('#materials').on('click', '.remove', function(){
             $(this).parents('tr').children('.dead-flag').val('true');
-            updateDom('#materials','/Specification/Edit/DeleteMaterial');          
+            updateDom('#materials','/Specifications/Edit/DeleteMaterial');          
         });
 
         $('#add-interview-button').on('click', function(){
-            updateDom('#interviews','/Specification/Edit/AddInterview');
+            updateDom('#interviews','/Specifications/Edit/AddInterview');
         });
 
         $('#interviews').on('click', '.remove', function(){
             $(this).parents('tr').children('.dead-flag').val('true');
-            updateDom('#interviews','/Specification/Edit/DeleteInterview');
+            updateDom('#interviews','/Specifications/Edit/DeleteInterview');
         });
 
         $('#add-cast-button').on('click', function(){
-            updateDom('#casts','/Specification/Edit/AddCast');
+            updateDom('#casts','/Specifications/Edit/AddCast');
         });
 
         $('#casts').on('click', '.remove', function(){
             $(this).parents('tr').children('.dead-flag').val('true');
-            updateDom('#casts','/Specification/Edit/DeleteCast');
+            updateDom('#casts','/Specifications/Edit/DeleteCast');
         });
     </script>
 

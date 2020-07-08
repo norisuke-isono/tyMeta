@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Interfaces;
 using Web.ViewModels;
 
-namespace Web.Pages_Specification
+namespace Web.Pages_Specifications
 {
     public class SearchModel : PageModel
     {
