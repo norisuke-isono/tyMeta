@@ -50,6 +50,7 @@ namespace Web
             services.AddScoped<IArticleSourceService, ArticleSourceService>();
             services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
             services.AddScoped<ISpecificationViewModelService, SpecificationViewModelService>();
+            services.AddScoped<ITvProgramViewModelService, TvProgramViewModelService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorPagesOptions(options =>
