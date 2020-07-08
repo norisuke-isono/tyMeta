@@ -49,7 +49,7 @@ namespace Web.Pages_Broadcasts
             if (broadcastViewModel == null)
             {
                 await _broadcastService
-                    .CreateBroadcastWithDefaultSchedules((int)TvProgramId, AirDate);
+                    .CreateBroadcastWithDefaultSchedulesAsync((int)TvProgramId, AirDate);
                 broadcastViewModel = await _broadcastViewModelService
                     .GetBroadcastViewModel((int)TvProgramId, AirDate);
             }
@@ -59,7 +59,7 @@ namespace Web.Pages_Broadcasts
 
         public async Task<IActionResult> OnPostDeleteAsync()
         {
-            await _broadcastService.DeleteBroadcast((int)TvProgramId, AirDate);
+            await _broadcastService.DeleteBroadcastAsync((int)TvProgramId, AirDate);
 
             return RedirectToPage("./Schedules");
         }

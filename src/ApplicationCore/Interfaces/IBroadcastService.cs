@@ -9,10 +9,10 @@ namespace ApplicationCore.Interfaces
     {
         Task<Broadcast> FindBroadcastAsync(int tvProgramId, DateTime airDate);
 
-        Task CreateBroadcastWithDefaultSchedules(int tvProgramId, DateTime airDate);
+        Task CreateBroadcastWithDefaultSchedulesAsync(int tvProgramId, DateTime airDate);
 
         Task UpdateBroadcastAsync(Broadcast broadcast);
 
-        Task DeleteBroadcast(int tvProgramId, DateTime airDate);
+        Task DeleteBroadcastAsync(int tvProgramId, DateTime airDate);
     }
 }

@@ -26,7 +26,7 @@ namespace ApplicationCore.Services
             return broadcast;
         }
 
-        public async Task CreateBroadcastWithDefaultSchedules(int tvProgramId, DateTime airDate)
+        public async Task CreateBroadcastWithDefaultSchedulesAsync(int tvProgramId, DateTime airDate)
         {
             var defaultSchedules = await _context.DefaultSchedules
                 .Where(x => x.TvProgramId == tvProgramId)
@@ -65,7 +65,7 @@ namespace ApplicationCore.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteBroadcast(int tvProgramId, DateTime airDate)
+        public async Task DeleteBroadcastAsync(int tvProgramId, DateTime airDate)
         {
             var broadcast = await _context.Broadcasts
                 .SingleOrDefaultAsync(x => x.TvProgramId == tvProgramId && x.AirDate == airDate);
