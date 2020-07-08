@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm fixed-top navbar-light bg-white border-bottom box-shadow p-1">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-page="/Broadcasts/Schedules">tyMETA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -29,34 +29,37 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Broadcasts/Schedules">
+                            <a id="schedules-nav-link" class="nav-link p-3" asp-page="/Broadcasts/Schedules">
+                                <i class="fas fa-list-ol pr-2"></i>
                                 番組構成
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Specifications/Search">
+                            <a id="specifications-nav-link" class="nav-link p-3" asp-page="/Specifications/Search">
+                                <i class="fas fa-search pr-2"></i>
                                 明細検索
                             </a>
                         </li>                        
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#masterMenu">
+                            <a id="master-nav-link" class="nav-link p-3" href="#masterMenu">
+                                <i class="fas fa-database pr-2"></i>
                                 マスタ管理
                             </a>
-                            <ul class="collapse" id="masterMenu">
-                                <a class="nav-link" asp-page="/TvPrograms/Index">
+                            <ul id="masterMenu">
+                                <a id="tvprograms-nav-link" class="nav-link" asp-page="/TvPrograms/Index">
                                     番組マスタ
                                 </a>
-                                <a class="nav-link" asp-page="/Corners/Index">
+                                <a id="corners-nav-link" class="nav-link" asp-page="/Corners/Index">
                                     コーナーマスタ
                                 </a>
-                                <a class="nav-link" asp-page="/DefaultSchedules/Index">
+                                <a id="sheet-nav-link" class="nav-link" asp-page="/DefaultSchedules/Index">
                                     シートマスタ
                                 </a>
-                                <a class="nav-link" asp-page="/VideoSources/Index">
+                                <a id="videosources-nav-link" class="nav-link" asp-page="/VideoSources/Index">
                                     映像ソース
                                 </a>
-                                <a class="nav-link" asp-page="/ArticleSources/Index">
+                                <a id="articlesources-nav-link"  class="nav-link" asp-page="/ArticleSources/Index">
                                     原稿ソース
                                 </a>  
                             </ul>
@@ -65,22 +68,22 @@
                 </div>
             </nav>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4 mt-3">
                 @RenderBody()
             </main>
         
         </div>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - tyMETA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.12.1/jquery-ui.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+
+    @if (ViewData["ActiveNavLink"] != null)
+    {
+        <script type="text/javascript">document.getElementById("@ViewData["ActiveNavLink"]").classList.add("active")</script>
+    }
 </body>
 </html>
