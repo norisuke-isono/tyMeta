@@ -1,5 +1,5 @@
 @page
-@model Web.Pages_Schedules.IndexModel
+@model Web.Pages_Broadcasts.SchedulesModel
 
 @{
     ViewData["Title"] = "番組構成";
@@ -127,7 +127,7 @@
                     const items = $(this).sortable("toArray", {attribute: "data-scheduleId"});
                     $.ajax({
                         type: 'POST',
-                        url: '/Schedules/Index?handler=sort',
+                        url: '/Broadcasts/Schedules?handler=sort',
                         data: { scheduleIds: items },
                         headers: {
                             RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()

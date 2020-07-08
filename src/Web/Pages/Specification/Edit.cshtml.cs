@@ -44,7 +44,7 @@ namespace Web.Pages_Specification
                 .UpdateSpecificationFrom(SpecificationViewModel);
 
             return RedirectToPage(
-                "/Schedules/Index",
+                "/Broadcasts/Schedules",
                 new
                 {
                     AirDate = SpecificationViewModel.AirDate.ToString("yyyy-MM-dd"),

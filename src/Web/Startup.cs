@@ -55,7 +55,7 @@ namespace Web
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
-                options.Conventions.AddPageRoute("/Schedules/index", "");
+                options.Conventions.AddPageRoute("/Broadcasts/Schedules", "");
             });
         }
 

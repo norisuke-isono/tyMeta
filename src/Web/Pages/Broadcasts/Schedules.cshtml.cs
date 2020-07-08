@@ -10,19 +10,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.Interfaces;
 using Web.ViewModels;
 
-namespace Web.Pages_Schedules
+namespace Web.Pages_Broadcasts
 {
-    public class IndexModel : PageModel
+    public class SchedulesModel : PageModel
     {
         private readonly ITvProgramService _tvProgramService;
         private readonly IBroadcastService _broadcastService;
         private readonly IScheduleService _scheduleService;
         private readonly IScheduleViewModelService _scheduleViewModelService;
 
-        public IndexModel(ITvProgramService tvProgramService,
-                          IBroadcastService broadcastService,
-                          IScheduleService scheduleService,
-                          IScheduleViewModelService scheduleViewModelService)
+        public SchedulesModel(ITvProgramService tvProgramService,
+                              IBroadcastService broadcastService,
+                              IScheduleService scheduleService,
+                              IScheduleViewModelService scheduleViewModelService)
         {
             _tvProgramService = tvProgramService;
             _broadcastService = broadcastService;
@@ -64,14 +64,14 @@ namespace Web.Pages_Schedules
             await _broadcastService
                 .DeleteBroadcast((int)TvProgramId, AirDate);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Schedules");
         }
 
         public async Task<IActionResult> OnPostSortAsync(int[] scheduleIds)
         {
             await _scheduleService.SortSchedulesAsync(scheduleIds);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Schedules");
         }
     }
 }
