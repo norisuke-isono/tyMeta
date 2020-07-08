@@ -11,6 +11,8 @@ namespace ApplicationCore.Interfaces
 
         Task CreateBroadcastWithDefaultSchedules(int tvProgramId, DateTime airDate);
 
+        Task UpdateBroadcastAsync(Broadcast broadcast);
+
         Task DeleteBroadcast(int tvProgramId, DateTime airDate);
     }
 }

@@ -47,6 +47,22 @@ namespace ApplicationCore.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateBroadcastAsync(Broadcast broadcast)
+        {
+            var entity = await _context.Broadcasts
+                .Include(x => x.Schedules)
+                .SingleOrDefaultAsync(x => x.Id == broadcast.Id);
+
+            if (entity == null)
+                throw new NotFoundException(nameof(Broadcast), broadcast.Id);
+
+            // TODO: _context.Entry(entity).State = EntityState.Modified;
+            entity.AirDate = broadcast.AirDate;
+            entity.Schedules = broadcast.Schedules;
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task DeleteBroadcast(int tvProgramId, DateTime airDate)
         {
             var broadcast = await _context.Broadcasts
