@@ -1,0 +1,15 @@
+<script>
+    function updateDom(target, url){
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: $(target + ' :input').serialize(),
+            headers: {
+                RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+            },
+            success: function(partialView){
+                $(target).html(partialView);
+            }
+        });
+    }
+</script>

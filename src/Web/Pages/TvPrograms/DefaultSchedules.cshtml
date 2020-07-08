@@ -58,7 +58,6 @@
     </table>
 </form>
 
-
 @section Scripts{
     <script>
         $('#add-schedule-button').on('click', function(){
@@ -69,20 +68,7 @@
             $(this).parents('tr').children('.dead-flag').val('true');
             updateDom('#schedules','/TvPrograms/DefaultSchedules/DeleteDefaultSchedule?TvProgramId=@Model.TvProgramId');          
         });
-
-        // TODO: 共通化
-        function updateDom(target, url){
-            $.ajax({
-                type: 'POST',
-                url: url,
-                data: $(target + ' :input').serialize(),
-                headers: {
-                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
-                success: function(partialView){
-                    $(target).html(partialView);
-                }
-            });
-        }
     </script>
+
+    @await Html.PartialAsync("_EditableTableScripts")
 }
