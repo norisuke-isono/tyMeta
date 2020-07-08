@@ -19,6 +19,8 @@ namespace ApplicationCore.Services
         public async Task<Broadcast> FindBroadcastAsync(int tvProgramId, DateTime airDate)
         {
             var broadcast = await _context.Broadcasts
+                .Include(br => br.Schedules).ThenInclude(sc => sc.Corner)
+                .Include(br => br.Schedules).ThenInclude(sc => sc.Specification)
                 .SingleOrDefaultAsync(x => x.TvProgramId == tvProgramId && x.AirDate == airDate);
 
             return broadcast;
