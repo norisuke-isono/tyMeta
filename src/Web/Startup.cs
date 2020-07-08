@@ -43,12 +43,10 @@ namespace Web
             services.AddScoped<ITvProgramService, TvProgramService>();
             services.AddScoped<ICornerService, CornerService>();
             services.AddScoped<IBroadcastService, BroadcastService>();
-            services.AddScoped<IScheduleService, ScheduleService>();
             services.AddScoped<ISpecificationService, SpecificationService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IVideoSourceService, VideoSourceService>();
             services.AddScoped<IArticleSourceService, ArticleSourceService>();
-            services.AddScoped<IScheduleViewModelService, ScheduleViewModelService>();
             services.AddScoped<ISpecificationViewModelService, SpecificationViewModelService>();
             services.AddScoped<ITvProgramViewModelService, TvProgramViewModelService>();
             services.AddScoped<IBroadcastViewModelService, BroadcastViewModelService>();
