@@ -1,0 +1,25 @@
+@model Web.Pages_TvPrograms.DefaultSchedulesModel
+
+@for (var i=0; i<Model.DefaultScheduleViewModels.Count(); i++) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.DefaultScheduleViewModels[i].Sequence)
+            @Html.HiddenFor(model => model.DefaultScheduleViewModels[i].Sequence)
+        </td>
+        <td>
+            @Html.DropDownListFor(model => model.DefaultScheduleViewModels[i].CornerId, 
+                                            Model.Corners,  "未選択", new { @class="form-control" })
+        </td>
+        <td>
+            @Html.EditorFor(model => model.DefaultScheduleViewModels[i].DisplayFlag)
+        </td>
+        <input class="dead-flag" type="hidden" asp-for="@Model.DefaultScheduleViewModels[i].Dead" value="false" />
+        <td>
+            <span class="remove">
+                <button type="button" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+            </span>
+        </td>
+    </tr>
+}

@@ -1,0 +1,88 @@
+@page "{handler?}"
+@model Web.Pages_TvPrograms.DefaultSchedulesModel
+
+@{
+    ViewData["Title"] = "デフォルト番組構成";
+}
+
+<h4>デフォルト番組構成</h4>
+<hr />
+
+<div class="container-fluid" style="padding: 10px;">
+    <form id="search-form">
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label>番組</label>
+                <select asp-for="TvProgramId" asp-items="Model.TvPrograms" class="form-control" ></select>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <button type="submit" form="search-form" class="btn btn-primary">
+                <i class="fa fa-search" aria-hidden="true"></i>&nbsp;表示
+            </button>
+        </div>
+        <div class="col-auto">
+            <button type="submit" form="default-schedules-form" class="btn btn-primary">
+                <i class="fa fa-save" aria-hidden="true"></i>&nbsp;保存
+            </button>
+        </div>
+    </div>
+</div>
+
+<form method="POST" id="default-schedules-form"> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DefaultScheduleViewModels[0].Sequence)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DefaultScheduleViewModels[0].CornerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DefaultScheduleViewModels[0].DisplayFlag)
+                </th>
+                <th>
+                    <button id="add-schedule-button" type="button" class="btn btn-primary btn-sm">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button> 
+                </th>
+            </tr>
+        </thead>
+        <tbody id="schedules">
+            @await Html.PartialAsync("_DefaultScheduleRecords", Model)
+        </tbody>
+    </table>
+</form>
+
+
+@section Scripts{
+    <script>
+        $('#add-schedule-button').on('click', function(){
+            updateDom('#schedules','/TvPrograms/DefaultSchedules/AddDefaultSchedule?TvProgramId=@Model.TvProgramId');
+        });
+
+        $('#schedules').on('click', '.remove', function(){
+            $(this).parents('tr').children('.dead-flag').val('true');
+            updateDom('#schedules','/TvPrograms/DefaultSchedules/DeleteDefaultSchedule?TvProgramId=@Model.TvProgramId');          
+        });
+
+        // TODO: 共通化
+        function updateDom(target, url){
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: $(target + ' :input').serialize(),
+                headers: {
+                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function(partialView){
+                    $(target).html(partialView);
+                }
+            });
+        }
+    </script>
+}
