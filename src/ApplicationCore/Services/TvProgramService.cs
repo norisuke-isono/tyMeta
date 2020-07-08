@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Common.Exceptions;
 using ApplicationCore.Entites;
 using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,22 @@ namespace ApplicationCore.Services
                 .ToListAsync();
 
             return programs;
+        }
+
+        public async Task UpdateTvProgramAsync(TvProgram tvProgram)
+        {
+            var entity = await _context.TvPrograms
+                .Include(x => x.DefaultSchedules)
+                .SingleOrDefaultAsync(x => x.Id == tvProgram.Id);
+
+            if (entity == null)
+                throw new NotFoundException(nameof(TvProgram), tvProgram.Id);
+
+            // TODO: _context.Entry(entity).State = EntityState.Modified;
+            entity.Name = tvProgram.Name;
+            entity.DefaultSchedules = tvProgram.DefaultSchedules;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

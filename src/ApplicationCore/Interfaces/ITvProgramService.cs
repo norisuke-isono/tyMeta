@@ -9,5 +9,7 @@ namespace ApplicationCore.Interfaces
         Task<TvProgram> FindTvProgramAsync(int tvProgramId);
 
         Task<List<TvProgram>> GetTvProgramsAsync();
+
+        Task UpdateTvProgramAsync(TvProgram tvProgram);
     }
 }
