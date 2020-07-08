@@ -16,6 +16,13 @@ namespace ApplicationCore.Services
             _context = context;
         }
 
+        public async Task<TvProgram> FindTvProgramAsync(int tyProgramId)
+        {
+            return await _context.TvPrograms
+                .Include(x => x.DefaultSchedules)
+                .SingleOrDefaultAsync(x => x.Id == tyProgramId);
+        }
+
         public async Task<List<TvProgram>> GetTvProgramsAsync()
         {
             var programs = await _context.TvPrograms
