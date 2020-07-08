@@ -55,26 +55,26 @@
                 @Html.DisplayNameFor(model => model.Schedules[0].Sequence)
             </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.Schedules[0].CornerName)
+                @Html.DisplayNameFor(model => model.ScheduleViewModels[0].CornerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedules[0].CornerType)
+                @Html.DisplayNameFor(model => model.ScheduleViewModels[0].CornerType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedules[0].Title)
+                @Html.DisplayNameFor(model => model.ScheduleViewModels[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedules[0].Director)
+                @Html.DisplayNameFor(model => model.ScheduleViewModels[0].Director)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Schedules[0].Desk)
+                @Html.DisplayNameFor(model => model.ScheduleViewModels[0].Desk)
             </th>            
             <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Schedules) {
+@foreach (var item in Model.ScheduleViewModels) {
         <tr data-scheduleId="@item.ScheduleId">
             @* <td>
                 @Html.DisplayFor(modelItem => item.Sequence)
@@ -127,7 +127,7 @@
                     const items = $(this).sortable("toArray", {attribute: "data-scheduleId"});
                     $.ajax({
                         type: 'POST',
-                        url: '/Broadcasts/Schedules?handler=sort',
+                        url: '/Broadcasts/Schedules?handler=sort&TvProgramId=@Model.TvProgramId&AirDate=@Model.AirDate.ToString("yyyy-MM-dd")',
                         data: { scheduleIds: items },
                         headers: {
                             RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()

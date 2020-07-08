@@ -16,18 +16,15 @@ namespace Web.Pages_Broadcasts
     {
         private readonly ITvProgramService _tvProgramService;
         private readonly IBroadcastService _broadcastService;
-        private readonly IScheduleService _scheduleService;
-        private readonly IScheduleViewModelService _scheduleViewModelService;
+        private readonly IBroadcastViewModelService _broadcastViewModelService;
 
         public SchedulesModel(ITvProgramService tvProgramService,
                               IBroadcastService broadcastService,
-                              IScheduleService scheduleService,
-                              IScheduleViewModelService scheduleViewModelService)
+                              IBroadcastViewModelService broadcastViewModelService)
         {
             _tvProgramService = tvProgramService;
             _broadcastService = broadcastService;
-            _scheduleService = scheduleService;
-            _scheduleViewModelService = scheduleViewModelService;
+            _broadcastViewModelService = broadcastViewModelService;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -37,8 +34,8 @@ namespace Web.Pages_Broadcasts
         public DateTime AirDate { get; set; } = DateTime.Now;
 
         public SelectList TvPrograms { get; set; }
-        public IList<ScheduleIndexViewModel> Schedules { get; set; }
-            = Enumerable.Empty<ScheduleIndexViewModel>().ToList();
+        public IList<ScheduleViewModel> ScheduleViewModels { get; set; }
+            = Enumerable.Empty<ScheduleViewModel>().ToList();
 
         public async Task OnGetAsync()
         {
@@ -47,29 +44,33 @@ namespace Web.Pages_Broadcasts
 
             if (TvProgramId == null) return;
 
-            var broadcast = await _broadcastService
-                .FindBroadcastAsync((int)TvProgramId, AirDate);
-            if (broadcast == null)
+            var broadcastViewModel = await _broadcastViewModelService
+                .GetBroadcastViewModel((int)TvProgramId, AirDate);
+            if (broadcastViewModel == null)
             {
                 await _broadcastService
                     .CreateBroadcastWithDefaultSchedules((int)TvProgramId, AirDate);
+                broadcastViewModel = await _broadcastViewModelService
+                    .GetBroadcastViewModel((int)TvProgramId, AirDate);
             }
 
-            Schedules = await _scheduleViewModelService
-                .GetSchedules((int)TvProgramId, AirDate);
+            ScheduleViewModels = broadcastViewModel.ScheduleViewModels.OrderBy(x => x.Sequence).ToList();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()
         {
-            await _broadcastService
-                .DeleteBroadcast((int)TvProgramId, AirDate);
+            await _broadcastService.DeleteBroadcast((int)TvProgramId, AirDate);
 
             return RedirectToPage("./Schedules");
         }
 
         public async Task<IActionResult> OnPostSortAsync(int[] scheduleIds)
         {
-            await _scheduleService.SortSchedulesAsync(scheduleIds);
+            var broadcast = await _broadcastService.FindBroadcastAsync((int)TvProgramId, AirDate);
+
+            broadcast.Schedules.ForEach(x => x.Sequence = Array.IndexOf(scheduleIds, x.Id));
+
+            await _broadcastService.UpdateBroadcastAsync(broadcast);
 
             return RedirectToPage("./Schedules");
         }
