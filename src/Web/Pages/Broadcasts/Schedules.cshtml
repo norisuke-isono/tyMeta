@@ -115,6 +115,8 @@
 @section Scripts{
     <script>
         $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
             $("tbody tr").click(function() {
                 window.location = $(this).data('href');
             });
