@@ -73,7 +73,7 @@ a {
 }
 
 .sidebar .nav-link:hover {
-  background: rgb(228, 228, 228);
+  background: rgb(235, 235, 235);
 }
 
 /* Sticky footer styles
@@ -122,6 +122,17 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/* Customs
+-------------------------------------------------- */
 .borderless-top th {
   border-top: none;
+}
+
+.link-button {
+  font-size: 0.8em; 
+  width: 135px;
+}
+
+tbody tr:hover{
+  background: rgb(240, 240, 240);
 }

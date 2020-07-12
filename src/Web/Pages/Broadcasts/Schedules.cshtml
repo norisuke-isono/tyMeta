@@ -9,35 +9,42 @@
 <h4>番組構成</h4>
 <hr />
 
-<div class="container-fluid" style="padding: 10px;">
-    <form id="searchform">
-        <div class="form-row">
-            <div class="form-group col-md-5">
-                <label>放送日</label>
-                <input type="date" asp-for="AirDate" class="form-control" />
-            </div>
-            <div class="form-group col-md-5">
-                <label>番組</label>
-                <select asp-for="TvProgramId" asp-items="Model.TvProgramSelectList" class="form-control" ></select>
-            </div>
-        </div>
-    </form>
+<div class="container-fluid p-0">
+    <div class="row m-0">
+        <div class="col-auto p-0">
+            <form id="searchform">
+                <div class="form-row">
+                    <div class="form-group col m-0" style="width: 300px;">
+                        <label>放送日</label>
+                        <input type="date" asp-for="AirDate" class="form-control" />
+                    </div>
+                    <div class="form-group col m-0" style="width: 300px;">
+                        <label>番組</label>
+                        <select asp-for="TvProgramId" asp-items="Model.TvProgramSelectList" class="form-control" ></select>
+                    </div>
 
-    <div class="row">
-        <div class="col-auto">
-            <button type="submit" form="searchform" class="btn btn-primary">
-                <i class="fa fa-search" aria-hidden="true"></i>&nbsp;表示
-            </button>
-            <button class="btn btn-primary">
-                <i class="fa fa-download" aria-hidden="true"></i>&nbsp;CSV
-            </button>
+                    <div class="col mt-auto">
+                        <button type="submit" form="searchform" class="btn btn-primary">
+                            <i class="fa fa-search" aria-hidden="true"></i>&nbsp;表示
+                        </button>
+                        <button class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="CSVダウンロード">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
         </div>
-        <div class="col-auto mr-auto">
-            <a class="nav-link" asp-page="/TvPrograms/DefaultSchedules" asp-route-tvprogramid="@Model.TvProgramId">
+    </div>
+
+    <div class="row m-0 mt-3">
+        <div class="col-auto p-0">
+            <a class="btn btn-sm btn-outline-secondary rounded-pill link-button ml-2"
+               asp-page="/TvPrograms/DefaultSchedules" asp-route-tvprogramid="@Model.TvProgramId">
                 デフォルト番組構成
             </a> 
         </div>
-        <div class="col-auto">
+        <div class="col-auto ml-auto p-0">
             <form method="post" asp-page-handler="delete">
                 <input type="hidden" asp-for="AirDate" />
                 <input type="hidden" asp-for="TvProgramId" />
@@ -49,7 +56,7 @@
     </div>
 </div>
 
-<table id="sortable" class="table">
+<table id="sortable" class="table mt-2">
     <thead>
         <tr>
             @* <th>
@@ -99,7 +106,7 @@
                 <a asp-page="/Specifications/Edit" asp-route-id="@item.SpecificationId">明細</a>
             </td>
             <td class="sortable-handle">
-                <i class="fas fa-arrows-alt-v"></i>
+                <i class="fas fa-align-justify"></i>
             </td> 
         </tr>
 }
