@@ -42,7 +42,7 @@
             <a class="btn btn-sm btn-outline-secondary rounded-pill link-button ml-2"
                asp-page="/TvPrograms/DefaultSchedules" asp-route-tvprogramid="@Model.TvProgramId">
                 デフォルト番組構成
-            </a> 
+            </a>
         </div>
         <div class="col-auto ml-auto p-0">
             <form method="post" asp-page-handler="delete">
@@ -78,12 +78,11 @@
                 @Html.DisplayNameFor(model => model.ScheduleViewModels[0].Desk)
             </th>            
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.ScheduleViewModels) {
-        <tr data-scheduleId="@item.ScheduleId">
+        <tr class="click-row" data-scheduleId="@item.ScheduleId" data-href="/Specifications/Edit?id=@item.SpecificationId">
             @* <td>
                 @Html.DisplayFor(modelItem => item.Sequence)
             </td> *@
@@ -101,9 +100,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Desk)
-            </td>            
-            <td>
-                <a asp-page="/Specifications/Edit" asp-route-id="@item.SpecificationId">明細</a>
             </td>
             <td class="sortable-handle">
                 <i class="fas fa-align-justify"></i>
@@ -115,7 +111,11 @@
 
 @section Scripts{
     <script>
-        $(function(){
+        $(function () {
+            $("tbody tr").click(function() {
+                window.location = $(this).data('href');
+            });
+
             function fixPlaceHolderWidth(event, ui){
                 // adjust placeholder td width to original td width
                 ui.children().each(function(){
