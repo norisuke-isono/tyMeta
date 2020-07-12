@@ -27,6 +27,9 @@ namespace Web.ViewModels
 
         public string Desk { get; set; }
 
+        [Display(Name = "デスクチェック")]
+        public bool DeskCheck { get; set; }
+
         public int ScheduleId { get; set; }
 
         public int BroadcastId { get; set; }
@@ -44,6 +47,7 @@ namespace Web.ViewModels
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Specification.Title))
                 .ForMember(dest => dest.Director, opt => opt.MapFrom(src => src.Specification.Director))
                 .ForMember(dest => dest.Desk, opt => opt.MapFrom(src => src.Specification.Desk))
+                .ForMember(dest => dest.DeskCheck, opt => opt.MapFrom(src => src.Specification.DeskCheck))
                 .ForMember(dest => dest.ScheduleId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.BroadcastId, opt => opt.MapFrom(src => src.BroadcastId))
                 .ForMember(dest => dest.CornerId, opt => opt.MapFrom(src => src.Corner.Id))
