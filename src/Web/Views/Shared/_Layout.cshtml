@@ -42,11 +42,11 @@
                         </li>                        
 
                         <li class="nav-item">
-                            <a id="master-nav-link" class="nav-link p-3" href="#masterMenu">
+                            <div id="master-link-group" class="nav-link-group p-3" data-toggle="collapse" data-target="#master-nav-links">
                                 <i class="fas fa-database pr-2"></i>
                                 マスタ管理
-                            </a>
-                            <ul id="masterMenu">
+                            </div>
+                            <ul id="master-nav-links" class="collapse show pl-4">
                                 <a id="tvprograms-nav-link" class="nav-link" asp-page="/TvPrograms/Index">
                                     番組マスタ
                                 </a>
@@ -81,6 +81,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         $("@ViewData["ActiveNavLink"]").addClass("active");
+        $("@ViewData["ActiveNavLinkGroup"]").addClass("show");
     </script>
 
     @RenderSection("Scripts", required: false)
